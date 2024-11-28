@@ -21,7 +21,7 @@ const NavBar: React.FC = () => {
                 Recipes
               </Link>
             </Nav.Item>
-            <Nav.Item>
+            {/* <Nav.Item>
               <Link to="/register" className="nav-link">
                 Register
               </Link>
@@ -30,7 +30,7 @@ const NavBar: React.FC = () => {
               <Link to="/login" className="nav-link">
                 Login
               </Link>
-            </Nav.Item>
+            </Nav.Item> */}
           </Nav>
           <Nav>
             {isLoggedIn ? (

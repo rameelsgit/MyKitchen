@@ -3,13 +3,15 @@ import { Routes, Route } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { AuthProvider } from "./context/AuthContext";
-
 import NavbarComponent from "./components/NavBar";
 import HomePage from "./pages/HomePage";
 import NotFound from "./pages/NotFoundPage";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import { ToastContainer } from "react-toastify";
+import PrivateRoute from "./components/PrivateRoute";
+import ProfilePage from "./pages/ProfilePage";
+import "./assets/scss/styles.scss";
 
 const App: React.FC = () => {
   return (
@@ -17,12 +19,16 @@ const App: React.FC = () => {
       <div className="d-flex flex-column min-vh-100">
         <NavbarComponent />
 
-        <Container className="flex-grow-1 py-4">
+        <Container className="flex-grow-1 ">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="*" element={<NotFound />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route
+              path="/profile"
+              element={<PrivateRoute element={<ProfilePage />} />}
+            />
           </Routes>
         </Container>
 

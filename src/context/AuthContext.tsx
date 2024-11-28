@@ -23,7 +23,11 @@ interface AuthContextType {
   user: User | null;
   isLoggedIn: boolean;
   login: (email: string, password: string) => Promise<UserCredential>;
-  signup: (email: string, password: string) => Promise<UserCredential>;
+  signup: (
+    email: string,
+    password: string,
+    name: string
+  ) => Promise<UserCredential>;
   logout: () => Promise<void>;
   resetPassword: (email: string) => Promise<void>;
   setEmail: (email: string) => Promise<void>;
@@ -64,8 +68,14 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  const signup = (email: string, password: string) => {
-    return createUserWithEmailAndPassword(auth, email, password);
+  const signup = async (email: string, password: string, name: string) => {
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    await updateProfile(userCredential.user, { displayName: name });
+    return userCredential;
   };
 
   const logout = () => {

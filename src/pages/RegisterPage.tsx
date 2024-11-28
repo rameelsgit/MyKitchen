@@ -20,7 +20,7 @@ const Register: React.FC = () => {
       return;
     }
     try {
-      await signup(email, password);
+      await signup(email, password, name);
       toast.success("Registration successful!");
       setTimeout(() => {
         navigate("/");

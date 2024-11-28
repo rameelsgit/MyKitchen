@@ -59,7 +59,7 @@ const Login: React.FC = () => {
 
   return (
     <Container className="mt-5">
-      <h2 className="text-center">Logga in</h2>
+      <h2 className="text-center">Login</h2>
       <Form onSubmit={handleSubmit(onLoginSubmit)} className="w-50 mx-auto">
         <Form.Group className="mb-3" controlId="email">
           <Form.Label>Email</Form.Label>
