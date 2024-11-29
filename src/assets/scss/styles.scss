@@ -1,6 +1,6 @@
 //NAVBAR
 
-$navbar-bg-color: #cd6554;
+$navbar-bg-color: #dc5d4d;
 $navbar-link-color: white;
 $navbar-hover-color: rgba(255, 255, 255, 0.8);
 
@@ -48,57 +48,39 @@ $navbar-hover-color: rgba(255, 255, 255, 0.8);
   background-color: $navbar-link-color !important;
 }
 
-// HERO
-
-$hero-bg-image: url("../images/hero.jpg.webp");
-$hero-text-color: #ffffff;
-$hero-overlay-color: rgba(0, 0, 0, 0.5);
-
-.hero {
-  background-image: $hero-bg-image;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+// HEADER
+header {
   position: relative;
-  padding: 100px 0;
+  margin: 0;
+  padding: 0;
+  background-color: #dc5d4d;
+  text-align: center;
+  border-bottom: 1px solid transparent;
+  width: 100%;
+}
 
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-  }
+* {
+  box-sizing: border-box;
+}
 
-  .container {
-    position: relative;
-    z-index: 2;
-    color: $hero-text-color;
-  }
+header {
+  display: block;
+}
 
-  .hero-title {
-    font-size: 3rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-  }
+header img {
+  margin-top: 1em;
+  display: inline-block;
+  max-width: 1000px;
+  width: 100%;
+  height: auto;
+}
 
-  .hero-subtitle {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-  }
-
-  .hero-btn {
-    font-size: 1.25rem;
-    padding: 0.75rem 2rem;
-    background-color: #cd6554;
-    border: none;
-
-    &:hover {
-      background-color: darken(#cd6554, 10%);
-    }
-  }
+* {
+  box-sizing: border-box;
+}
+img {
+  overflow-clip-margin: content-box;
+  overflow: clip;
 }
 
 // CARD
@@ -130,12 +112,12 @@ $hero-overlay-color: rgba(0, 0, 0, 0.5);
   h5 {
     font-size: 1.2rem;
     font-weight: 600;
-    color: #cd6554;
+    color: #dc5d4d;
     margin-top: 15px;
   }
 
   svg {
-    color: #cd6554;
+    color: #dc5d4d;
   }
 }
 
@@ -154,13 +136,6 @@ $hero-overlay-color: rgba(0, 0, 0, 0.5);
   }
 }
 
-// h2 {
-//   font-size: 2.5rem;
-//   font-weight: 600;
-//   color: #cd6554;
-//   margin-bottom: 30px;
-// }
-
 // welcome
 .text-center {
   font-size: 1.2rem;
@@ -177,4 +152,11 @@ $hero-overlay-color: rgba(0, 0, 0, 0.5);
 .col {
   padding-left: 15px;
   padding-right: 15px;
+}
+
+// home
+
+h1 {
+  color: #ffffff;
+  font-size: 3rem;
 }

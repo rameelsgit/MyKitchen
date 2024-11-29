@@ -18,8 +18,7 @@ const App: React.FC = () => {
     <AuthProvider>
       <div className="d-flex flex-column min-vh-100">
         <NavbarComponent />
-
-        <Container className="flex-grow-1 ">
+        <Container fluid className="flex-grow-1 p-0 ">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="*" element={<NotFound />} />
