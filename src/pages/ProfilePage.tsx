@@ -1,17 +1,17 @@
 import React from "react";
 import { useAuth } from "../context/AuthContext";
 import { Container, Card, Row, Col } from "react-bootstrap";
-import { Link } from "react-router-dom"; 
+import { Link } from "react-router-dom";
 import { RiShoppingBag4Line } from "react-icons/ri";
 import { FaRegHeart, FaUserEdit } from "react-icons/fa";
-import "../assets/scss/styles.scss"; 
+import "../assets/scss/styles.scss";
 
 const ProfilePage: React.FC = () => {
   const { user } = useAuth();
 
   return (
     <Container className="mt-5">
-      <h2 className="text-center">Profile Page</h2>
+      <h2 className="text-center">Personal Dashboard</h2>
       {user ? (
         <div>
           <p className="text-center">

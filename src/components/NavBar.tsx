@@ -16,19 +16,9 @@ const NavBar: React.FC = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Item>
+            {/* <Nav.Item>
               <Link to="/recipes" className="nav-link">
                 Recipes
-              </Link>
-            </Nav.Item>
-            {/* <Nav.Item>
-              <Link to="/register" className="nav-link">
-                Register
-              </Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Link to="/login" className="nav-link">
-                Login
               </Link>
             </Nav.Item> */}
           </Nav>
@@ -36,11 +26,11 @@ const NavBar: React.FC = () => {
             {isLoggedIn ? (
               <NavDropdown title="Profile" id="profile-dropdown">
                 <NavDropdown.Item as={Link} to="/profile">
-                  View Profile
+                  View Dashboard
                 </NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/favorites">
+                {/* <NavDropdown.Item as={Link} to="/favorites">
                   My Favorite Recipes
-                </NavDropdown.Item>
+                </NavDropdown.Item> */}
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
               </NavDropdown>

@@ -1,4 +1,4 @@
-//NAVBAR
+// NAVBAR
 
 $navbar-bg-color: #dc5d4d;
 $navbar-link-color: white;
@@ -32,6 +32,7 @@ $navbar-hover-color: rgba(255, 255, 255, 0.8);
 
 .nav-dropdown-toggle {
   color: $navbar-link-color !important;
+
   &:hover {
     color: $navbar-hover-color !important;
   }
@@ -39,6 +40,7 @@ $navbar-hover-color: rgba(255, 255, 255, 0.8);
 
 .nav-dropdown-item {
   color: $navbar-link-color !important;
+
   &:hover {
     background-color: $navbar-hover-color;
   }
@@ -70,14 +72,11 @@ header {
 header img {
   margin-top: 1em;
   display: inline-block;
-  max-width: 1000px;
+  max-width: 1200px;
   width: 100%;
   height: auto;
 }
 
-* {
-  box-sizing: border-box;
-}
 img {
   overflow-clip-margin: content-box;
   overflow: clip;
@@ -136,14 +135,14 @@ img {
   }
 }
 
-// welcome
+// Welcome
 .text-center {
   font-size: 1.2rem;
   font-weight: 500;
   color: #666;
 }
 
-// card container style
+// Card container style
 .row {
   margin-left: 0;
   margin-right: 0;
@@ -154,9 +153,84 @@ img {
   padding-right: 15px;
 }
 
-// home
+// Center text for header and h2
+header {
+  text-align: center;
+  margin-bottom: 50px;
+}
 
 h1 {
-  color: #ffffff;
   font-size: 3rem;
+  color: #ffffff;
+  margin-top: 2rem;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #5b4d4d;
+}
+
+// Search bar
+.search-bar {
+  width: 60%;
+  margin: 0 auto;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 30px;
+  border: 2px solid #ddd;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+// Button styling
+.generate-btn {
+  background-color: #dc5d4d;
+  border-radius: 30px;
+  padding: 10px 20px;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.generate-btn:hover {
+  background-color: #4cae4c;
+}
+
+button {
+  font-size: 1rem;
+  border-radius: 25px;
+  padding: 8px 16px;
+}
+
+// Recipe Card
+.card {
+  border: none;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+  border-radius: 12px;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card-body {
+  padding: 15px;
+}
+
+// Add favorite button
+.favorite-icon {
+  color: #dc5d4d;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+p {
+  font-size: 18px;
 }
