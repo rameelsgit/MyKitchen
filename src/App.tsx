@@ -14,6 +14,7 @@ import ProfilePage from "./pages/ProfilePage";
 import "./assets/scss/styles.scss";
 import { FavoritesProvider } from "./context/FavoritesContext";
 import FavoritesPage from "./pages/FavoritesPage";
+import RecipeDetailPage from "./pages/RecipeDetailPage";
 
 const App: React.FC = () => {
   return (
@@ -25,6 +26,7 @@ const App: React.FC = () => {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/favorites" element={<FavoritesPage />} />
+              <Route path="/recipe/:id" element={<RecipeDetailPage />} />
               <Route path="*" element={<NotFound />} />
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/login" element={<LoginPage />} />

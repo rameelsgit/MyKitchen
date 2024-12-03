@@ -3,6 +3,7 @@ import { fetchRecipesByIngredients } from "../services/spoonacularApi";
 import { Container, Button, Form, Card, Row, Col } from "react-bootstrap";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { useFavorites } from "../context/FavoritesContext";
+import LoginModal from "../components/LoginModal";
 import "../assets/scss/styles.scss";
 import cookingImage from "../assets/images/cooking.png";
 
@@ -17,7 +18,8 @@ const HomePage: React.FC = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
-  const { favorites, addFavorite } = useFavorites();
+  const { favorites, addFavorite, showLoginModal, setShowLoginModal } =
+    useFavorites();
 
   const handleGenerateRecipes = async () => {
     if (ingredients.trim() === "") return;
@@ -38,6 +40,14 @@ const HomePage: React.FC = () => {
     if (e.key === "Enter") {
       e.preventDefault();
       handleGenerateRecipes();
+    }
+  };
+
+  const handleAddFavorite = (recipe: Recipe) => {
+    if (!favorites) {
+      setShowLoginModal(true);
+    } else {
+      addFavorite(recipe);
     }
   };
 
@@ -93,7 +103,7 @@ const HomePage: React.FC = () => {
                         <FaRegHeart
                           className="favorite-icon"
                           size={24}
-                          onClick={() => addFavorite(recipe)}
+                          onClick={() => handleAddFavorite(recipe)}
                           style={{ cursor: "pointer", color: "#dc5d4d" }}
                         />
                       )}
@@ -105,6 +115,10 @@ const HomePage: React.FC = () => {
           </Row>
         )}
       </Container>
+      <LoginModal
+        show={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+      />
     </>
   );
 };

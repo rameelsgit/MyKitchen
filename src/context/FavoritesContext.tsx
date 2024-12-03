@@ -9,7 +9,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Recipe, FavoritesContextType } from "../types/FavoritesTypes";
 import { useAuth } from "./AuthContext";
-
 interface FavoritesProviderProps {
   children: ReactNode;
 }
@@ -23,17 +22,22 @@ export const FavoritesProvider: React.FC<FavoritesProviderProps> = ({
 }) => {
   const { user } = useAuth();
   const [favorites, setFavorites] = useState<Recipe[]>([]);
+  const [showLoginModal, setShowLoginModal] = useState(false); 
 
   useEffect(() => {
     if (user) {
       const storedFavorites = localStorage.getItem(`favorites_${user.uid}`);
       setFavorites(storedFavorites ? JSON.parse(storedFavorites) : []);
     } else {
-      setFavorites([]); 
+      setFavorites([]);
     }
   }, [user]);
 
   const addFavorite = (recipe: Recipe) => {
+    if (!user) {
+      setShowLoginModal(true);
+      return;
+    }
     if (!favorites.some((fav) => fav.id === recipe.id)) {
       const updatedFavorites = [...favorites, recipe];
       setFavorites(updatedFavorites);
@@ -61,7 +65,13 @@ export const FavoritesProvider: React.FC<FavoritesProviderProps> = ({
 
   return (
     <FavoritesContext.Provider
-      value={{ favorites, addFavorite, removeFavorite }}
+      value={{
+        favorites,
+        addFavorite,
+        removeFavorite,
+        showLoginModal,
+        setShowLoginModal,
+      }}
     >
       {children}
     </FavoritesContext.Provider>
@@ -71,7 +81,7 @@ export const FavoritesProvider: React.FC<FavoritesProviderProps> = ({
 export const useFavorites = (): FavoritesContextType => {
   const context = useContext(FavoritesContext);
   if (!context) {
-    throw new Error("useFavorites should beused within a FavoritesProvider");
+    throw new Error("useFavorites must be used within a FavoritesProvider");
   }
   return context;
 };

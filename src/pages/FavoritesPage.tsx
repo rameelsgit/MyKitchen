@@ -23,23 +23,32 @@ const FavoritesPage: React.FC = () => {
       ) : (
         <Row>
           {favorites.map((recipe) => (
-            <Col key={recipe.id} sm={12} md={6} lg={4}>
+            <Col key={recipe.id} sm={12} md={6} lg={4} className="mb-4">
               <Card>
-                <Card.Img variant="top" src={recipe.image} alt={recipe.title} />
-                <Card.Body>
-                  <Card.Title>{recipe.title}</Card.Title>
-                  <button
-                    onClick={() => removeFavorite(recipe.id)}
-                    style={{
-                      cursor: "pointer",
-                      color: "#dc5d4d",
-                      border: "none",
-                      background: "none",
-                    }}
-                  >
-                    Remove
-                  </button>
-                </Card.Body>
+                <Link
+                  to={`/recipe/${recipe.id}`}
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <Card.Img
+                    variant="top"
+                    src={recipe.image}
+                    alt={recipe.title}
+                  />
+                  <Card.Body>
+                    <Card.Title>{recipe.title}</Card.Title>
+                  </Card.Body>
+                </Link>
+                <button
+                  onClick={() => removeFavorite(recipe.id)}
+                  style={{
+                    cursor: "pointer",
+                    color: "#dc5d4d",
+                    border: "none",
+                    background: "none",
+                  }}
+                >
+                  Remove
+                </button>
               </Card>
             </Col>
           ))}
