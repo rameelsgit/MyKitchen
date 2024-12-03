@@ -86,7 +86,7 @@ const Login: React.FC = () => {
         <Button
           variant="primary"
           type="submit"
-          className="w-100"
+          className="w-100 generate-btn"
           disabled={isSubmitting}
         >
           {isSubmitting ? "Logging in..." : "Log in"}

@@ -2,10 +2,14 @@ import axios from "axios";
 
 const API_KEY = import.meta.env.VITE_SPOONACULAR_API_KEY;
 
-export const fetchRecipesByIngredients = async (ingredients: string) => {
+export const fetchRecipesByIngredients = async (
+  ingredients: string,
+  number: number = 12,
+  offset: number = 0
+) => {
   try {
     const response = await axios.get(
-      `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients}&number=5&apiKey=${API_KEY}`
+      `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients}&number=${number}&offset=${offset}&apiKey=${API_KEY}`
     );
     return response.data;
   } catch (error) {
