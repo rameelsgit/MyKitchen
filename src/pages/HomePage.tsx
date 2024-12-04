@@ -1,14 +1,6 @@
 import React, { useState, useRef } from "react";
 import { fetchRecipesByIngredients } from "../services/spoonacularApi";
-import {
-  Container,
-  Button,
-  Form,
-  Card,
-  Row,
-  Col,
-  Spinner,
-} from "react-bootstrap";
+import { Container, Form, Card, Row, Col, Spinner } from "react-bootstrap";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { useFavorites } from "../context/FavoritesContext";
 import LoginModal from "../components/LoginModal";
@@ -72,7 +64,6 @@ const HomePage: React.FC = () => {
   };
 
   const handleLoadMore = async () => {
-    console.log("Loading more recipes...");
     setLoadingMore(true);
 
     setTimeout(async () => {
@@ -98,18 +89,18 @@ const HomePage: React.FC = () => {
     }, 1000);
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      handleGenerateRecipes();
-    }
-  };
-
   const handleAddFavorite = (recipe: Recipe) => {
     if (!favorites) {
       setShowLoginModal(true);
     } else {
       addFavorite(recipe);
+    }
+  };
+
+  const handleLoginSuccess = () => {
+    setShowLoginModal(false); 
+    if (ingredients.trim() !== "") {
+      handleGenerateRecipes(); 
     }
   };
 
@@ -122,7 +113,12 @@ const HomePage: React.FC = () => {
 
       <Container className="mt-5 text-center fade-in">
         <h2>Generate Recipes Based on Ingredients</h2>
-        <Form onKeyDown={handleKeyDown}>
+        <Form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleGenerateRecipes();
+          }}
+        >
           <Form.Control
             type="text"
             placeholder="Enter ingredients (e.g., tomato, cheese)"
@@ -130,13 +126,13 @@ const HomePage: React.FC = () => {
             onChange={(e) => setIngredients(e.target.value)}
             className="search-bar"
           />
-          <Button
-            onClick={handleGenerateRecipes}
+          <button
+            type="submit"
             disabled={loading}
-            className="mt-3 generate-btn"
+            className="mt-3 generate-btn btn btn-primary"
           >
             {loading ? "Loading..." : "Generate Recipes"}
-          </Button>
+          </button>
         </Form>
         {error && <p style={{ color: "red" }}>{error}</p>}
       </Container>
@@ -217,6 +213,7 @@ const HomePage: React.FC = () => {
       <LoginModal
         show={showLoginModal}
         onClose={() => setShowLoginModal(false)}
+        onLoginSuccess={handleLoginSuccess} 
       />
     </>
   );

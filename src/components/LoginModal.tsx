@@ -6,10 +6,21 @@ import { PiBowlFoodDuotone } from "react-icons/pi";
 interface LoginModalProps {
   show: boolean;
   onClose: () => void;
+  onLoginSuccess: () => void;
 }
 
-const LoginModal: React.FC<LoginModalProps> = ({ show, onClose }) => {
+const LoginModal: React.FC<LoginModalProps> = ({
+  show,
+  onClose,
+  onLoginSuccess,
+}) => {
   const navigate = useNavigate();
+
+  const handleLogin = () => {
+    navigate("/login");
+    onLoginSuccess();
+  };
+
   return (
     <Modal show={show} onHide={onClose} centered>
       <Modal.Header closeButton>
@@ -21,7 +32,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ show, onClose }) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Footer>
-        <Button className="generate-btn" onClick={() => navigate("/login")}>
+        <Button className="generate-btn" onClick={handleLogin}>
           Log In
         </Button>
       </Modal.Footer>
