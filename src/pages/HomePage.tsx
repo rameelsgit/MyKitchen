@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { fetchRecipesByIngredients } from "../services/spoonacularApi";
 import { Container, Form, Card, Row, Col, Spinner } from "react-bootstrap";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
@@ -15,17 +15,41 @@ interface Recipe {
 }
 
 const HomePage: React.FC = () => {
-  const [ingredients, setIngredients] = useState<string>("");
-  const [recipes, setRecipes] = useState<Recipe[]>([]);
+  const {
+    favorites,
+    addFavorite,
+    showLoginModal,
+    setShowLoginModal,
+    isLoggedIn,
+  } = useFavorites();
+
+  const [ingredients, setIngredients] = useState<string>(() => {
+    const lastSearch = localStorage.getItem("lastSearch") || "";
+    return lastSearch;
+  });
+  const [recipes, setRecipes] = useState<Recipe[]>(() => {
+    const savedRecipes = localStorage.getItem("lastResults");
+    return savedRecipes ? JSON.parse(savedRecipes) : [];
+  });
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
-  const [offset, setOffset] = useState<number>(0);
-  const [showLoadMore, setShowLoadMore] = useState<boolean>(false);
+  const [offset, setOffset] = useState<number>(recipes.length);
+  const [showLoadMore, setShowLoadMore] = useState<boolean>(recipes.length > 0);
   const [loadingMore, setLoadingMore] = useState<boolean>(false);
-
-  const { favorites, addFavorite, showLoginModal, setShowLoginModal } =
-    useFavorites();
   const resultsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      localStorage.removeItem("lastSearch");
+      localStorage.removeItem("lastResults");
+    }
+  }, [isLoggedIn]);
+
+  useEffect(() => {
+    if (recipes.length > 0 && resultsRef.current) {
+      resultsRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [recipes.length]);
 
   const handleGenerateRecipes = async () => {
     if (ingredients.trim() === "") {
@@ -35,37 +59,33 @@ const HomePage: React.FC = () => {
 
     setLoading(true);
     setError("");
-    setOffset(0);
-    try {
-      const results = await fetchRecipesByIngredients(ingredients, 12, 0);
-      if (results.length === 0) {
-        setError(
-          "No recipes found. Please check your spelling or try different ingredients."
-        );
-        setShowLoadMore(false);
-      } else {
-        setRecipes(results);
-        setShowLoadMore(true);
-        setTimeout(() => {
-          if (resultsRef.current) {
-            resultsRef.current.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
-            });
-          }
-        }, 100);
+    setOffset(12);
+    setTimeout(async () => {
+      try {
+        const results = await fetchRecipesByIngredients(ingredients, 12, 0);
+        if (results.length === 0) {
+          setError(
+            "No recipes found. Please check your spelling or try different ingredients."
+          );
+          setShowLoadMore(false);
+        } else {
+          setRecipes(results);
+          setShowLoadMore(true);
+          localStorage.setItem("lastSearch", ingredients);
+          localStorage.setItem("lastResults", JSON.stringify(results));
+          setTimeout(() => scrollToResults(), 100);
+        }
+      } catch (error) {
+        setError("Error fetching recipes. Please try again later.");
+        console.error(error);
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      setError("Error fetching recipes. Please try again later.");
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
+    }, 500);
   };
 
   const handleLoadMore = async () => {
     setLoadingMore(true);
-
     setTimeout(async () => {
       try {
         const newRecipes = await fetchRecipesByIngredients(
@@ -77,11 +97,13 @@ const HomePage: React.FC = () => {
           setShowLoadMore(false);
           setError("No more recipes available.");
         } else {
-          setRecipes((prevRecipes) => [...prevRecipes, ...newRecipes]);
+          const updatedRecipes = [...recipes, ...newRecipes];
+          setRecipes(updatedRecipes);
+          localStorage.setItem("lastResults", JSON.stringify(updatedRecipes));
           setOffset((prevOffset) => prevOffset + 12);
         }
       } catch (error) {
-        setError("Error fetching recipes. Please try again later.");
+        setError("Error fetching more recipes. Please try again later.");
         console.error(error);
       } finally {
         setLoadingMore(false);
@@ -89,8 +111,14 @@ const HomePage: React.FC = () => {
     }, 1000);
   };
 
+  const scrollToResults = () => {
+    if (resultsRef.current) {
+      resultsRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   const handleAddFavorite = (recipe: Recipe) => {
-    if (!favorites) {
+    if (!isLoggedIn) {
       setShowLoginModal(true);
     } else {
       addFavorite(recipe);
@@ -98,9 +126,9 @@ const HomePage: React.FC = () => {
   };
 
   const handleLoginSuccess = () => {
-    setShowLoginModal(false); 
+    setShowLoginModal(false);
     if (ingredients.trim() !== "") {
-      handleGenerateRecipes(); 
+      handleGenerateRecipes();
     }
   };
 
@@ -140,10 +168,10 @@ const HomePage: React.FC = () => {
       <div ref={resultsRef} style={{ marginTop: "40px" }}>
         {recipes.length > 0 && (
           <Row className="mt-4">
-            {recipes.map((recipe, index) => {
+            {recipes.map((recipe) => {
               const isFavorite = favorites.some((fav) => fav.id === recipe.id);
               return (
-                <Col key={`${recipe.id}-${index}`} sm={6} md={4} lg={2}>
+                <Col key={recipe.id} sm={6} md={4} lg={2}>
                   <Card className="recipe-card">
                     <Card.Img
                       variant="top"
@@ -213,7 +241,7 @@ const HomePage: React.FC = () => {
       <LoginModal
         show={showLoginModal}
         onClose={() => setShowLoginModal(false)}
-        onLoginSuccess={handleLoginSuccess} 
+        onLoginSuccess={handleLoginSuccess}
       />
     </>
   );

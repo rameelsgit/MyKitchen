@@ -3,18 +3,18 @@ import { Routes, Route } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { AuthProvider } from "./context/AuthContext";
+import { FavoritesProvider } from "./context/FavoritesContext";
 import NavbarComponent from "./components/NavBar";
 import HomePage from "./pages/HomePage";
 import NotFound from "./pages/NotFoundPage";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
-import { ToastContainer } from "react-toastify";
-import PrivateRoute from "./components/PrivateRoute";
 import ProfilePage from "./pages/ProfilePage";
-import "./assets/scss/styles.scss";
-import { FavoritesProvider } from "./context/FavoritesContext";
 import FavoritesPage from "./pages/FavoritesPage";
 import RecipeDetailPage from "./pages/RecipeDetailPage";
+import PrivateRoute from "./components/PrivateRoute";
+import "./assets/scss/styles.scss";
+import { ToastContainer } from "react-toastify";
 
 const App: React.FC = () => {
   return (
@@ -22,7 +22,7 @@ const App: React.FC = () => {
       <FavoritesProvider>
         <div className="d-flex flex-column min-vh-100">
           <NavbarComponent />
-          <Container fluid className="flex-grow-1 p-0 ">
+          <Container fluid className="flex-grow-1 p-0">
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/favorites" element={<FavoritesPage />} />

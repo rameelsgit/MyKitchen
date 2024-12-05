@@ -6,9 +6,11 @@ import React, {
   ReactNode,
 } from "react";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { Recipe, FavoritesContextType } from "../types/FavoritesTypes";
 import { useAuth } from "./AuthContext";
+import { db } from "../firebase/firebase";
+import { doc, setDoc, getDoc } from "firebase/firestore";
+
 interface FavoritesProviderProps {
   children: ReactNode;
 }
@@ -20,47 +22,75 @@ const FavoritesContext = createContext<FavoritesContextType | undefined>(
 export const FavoritesProvider: React.FC<FavoritesProviderProps> = ({
   children,
 }) => {
-  const { user } = useAuth();
+  const { user, logout: authLogout } = useAuth();
   const [favorites, setFavorites] = useState<Recipe[]>([]);
-  const [showLoginModal, setShowLoginModal] = useState(false); 
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(!!user);
 
   useEffect(() => {
     if (user) {
-      const storedFavorites = localStorage.getItem(`favorites_${user.uid}`);
-      setFavorites(storedFavorites ? JSON.parse(storedFavorites) : []);
+      const fetchFavoritesFromFirestore = async () => {
+        const favoritesRef = doc(db, "users", user.uid, "favorites", "list");
+        const snapshot = await getDoc(favoritesRef);
+        if (snapshot.exists()) {
+          setFavorites(snapshot.data().favorites);
+        } else {
+          setFavorites([]);
+        }
+      };
+      fetchFavoritesFromFirestore();
     } else {
       setFavorites([]);
     }
   }, [user]);
 
-  const addFavorite = (recipe: Recipe) => {
+  const addFavorite = async (recipe: Recipe) => {
     if (!user) {
       setShowLoginModal(true);
       return;
     }
+
     if (!favorites.some((fav) => fav.id === recipe.id)) {
       const updatedFavorites = [...favorites, recipe];
       setFavorites(updatedFavorites);
-      if (user) {
-        localStorage.setItem(
-          `favorites_${user.uid}`,
-          JSON.stringify(updatedFavorites)
-        );
-      }
+      const favoritesRef = doc(db, "users", user.uid, "favorites", "list");
+      await setDoc(favoritesRef, { favorites: updatedFavorites });
+
+      localStorage.setItem(
+        `favorites_${user.uid}`,
+        JSON.stringify(updatedFavorites)
+      );
+
       toast.success(`${recipe.title} added to favorites!`);
     }
   };
 
-  const removeFavorite = (id: number) => {
+  const removeFavorite = async (id: number) => {
     const updatedFavorites = favorites.filter((recipe) => recipe.id !== id);
     setFavorites(updatedFavorites);
+
+    if (user) {
+      const favoritesRef = doc(db, "users", user.uid, "favorites", "list");
+      await setDoc(favoritesRef, { favorites: updatedFavorites });
+    }
+
     if (user) {
       localStorage.setItem(
         `favorites_${user.uid}`,
         JSON.stringify(updatedFavorites)
       );
     }
+
     toast.info("Recipe removed from favorites.");
+  };
+
+  const logout = async () => {
+    if (authLogout) {
+      authLogout();
+      setIsLoggedIn(false);
+      setFavorites([]);
+      localStorage.removeItem(`favorites_${user?.uid}`);
+    }
   };
 
   return (
@@ -71,6 +101,8 @@ export const FavoritesProvider: React.FC<FavoritesProviderProps> = ({
         removeFavorite,
         showLoginModal,
         setShowLoginModal,
+        isLoggedIn,
+        logout,
       }}
     >
       {children}
