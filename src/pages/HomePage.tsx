@@ -16,8 +16,13 @@ interface Recipe {
 }
 
 const HomePage: React.FC = () => {
-  const { favorites, addFavorite, showLoginModal, setShowLoginModal } =
-    useFavorites();
+  const {
+    favorites,
+    addFavorite,
+    removeFavorite,
+    showLoginModal,
+    setShowLoginModal,
+  } = useFavorites();
   const { isLoggedIn } = useAuth();
 
   const [ingredients, setIngredients] = useState<string>(() => {
@@ -107,9 +112,16 @@ const HomePage: React.FC = () => {
     }
   };
 
-  const handleAddFavorite = (recipe: Recipe) => {
+  const handleFavoriteToggle = (recipe: Recipe) => {
     if (!isLoggedIn) {
       setShowLoginModal(true);
+      return;
+    }
+
+    const isFavorite = favorites.some((fav) => fav.id === recipe.id);
+
+    if (isFavorite) {
+      removeFavorite(recipe.id);
     } else {
       addFavorite(recipe);
     }
@@ -175,13 +187,14 @@ const HomePage: React.FC = () => {
                         <FaHeart
                           className="favorite-icon"
                           size={24}
+                          onClick={() => handleFavoriteToggle(recipe)}
                           style={{ cursor: "pointer", color: "#dc5d4d" }}
                         />
                       ) : (
                         <FaRegHeart
                           className="favorite-icon"
                           size={24}
-                          onClick={() => handleAddFavorite(recipe)}
+                          onClick={() => handleFavoriteToggle(recipe)}
                           style={{ cursor: "pointer", color: "#dc5d4d" }}
                         />
                       )}
