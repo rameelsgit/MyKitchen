@@ -78,8 +78,15 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     return userCredential;
   };
 
-  const logout = () => {
-    return signOut(auth);
+  const logout = async () => {
+    await signOut(auth);
+    setUser(null);
+    setUserEmail(null);
+    setUserName(null);
+
+    localStorage.removeItem("lastSearch");
+    localStorage.removeItem("lastResults");
+    window.location.reload();
   };
 
   const resetPassword = (email: string) => {

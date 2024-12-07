@@ -7,6 +7,7 @@ import LoginModal from "../components/LoginModal";
 import "../assets/scss/styles.scss";
 import cookingImage from "../assets/images/cooking.png";
 import { CgMoreR } from "react-icons/cg";
+import { useAuth } from "../context/AuthContext";
 
 interface Recipe {
   id: number;
@@ -15,13 +16,9 @@ interface Recipe {
 }
 
 const HomePage: React.FC = () => {
-  const {
-    favorites,
-    addFavorite,
-    showLoginModal,
-    setShowLoginModal,
-    isLoggedIn,
-  } = useFavorites();
+  const { favorites, addFavorite, showLoginModal, setShowLoginModal } =
+    useFavorites();
+  const { isLoggedIn } = useAuth();
 
   const [ingredients, setIngredients] = useState<string>(() => {
     const lastSearch = localStorage.getItem("lastSearch") || "";
@@ -37,13 +34,6 @@ const HomePage: React.FC = () => {
   const [showLoadMore, setShowLoadMore] = useState<boolean>(recipes.length > 0);
   const [loadingMore, setLoadingMore] = useState<boolean>(false);
   const resultsRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!isLoggedIn) {
-      localStorage.removeItem("lastSearch");
-      localStorage.removeItem("lastResults");
-    }
-  }, [isLoggedIn]);
 
   useEffect(() => {
     if (recipes.length > 0 && resultsRef.current) {
