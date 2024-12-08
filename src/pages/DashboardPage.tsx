@@ -6,7 +6,7 @@ import { RiShoppingBag4Line } from "react-icons/ri";
 import { FaRegHeart, FaUserEdit } from "react-icons/fa";
 import "../assets/scss/styles.scss";
 
-const ProfilePage: React.FC = () => {
+const DashboardPage: React.FC = () => {
   const { user } = useAuth();
 
   return (
@@ -63,4 +63,4 @@ const ProfilePage: React.FC = () => {
   );
 };
 
-export default ProfilePage;
+export default DashboardPage;

@@ -74,7 +74,7 @@ const Register: React.FC = () => {
             required
           />
         </Form.Group>
-        <Button variant="primary" type="submit" className="w-100 generate-btn">
+        <Button variant="success" type="submit" className="w-100 generate-btn">
           Register
         </Button>
       </Form>

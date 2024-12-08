@@ -1,3 +1,4 @@
+import { ToastContainer } from "react-toastify";
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { Container } from "react-bootstrap";
@@ -9,12 +10,12 @@ import HomePage from "./pages/HomePage";
 import NotFound from "./pages/NotFoundPage";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
-import ProfilePage from "./pages/ProfilePage";
+import DashboardPage from "./pages/DashboardPage";
 import FavoritesPage from "./pages/FavoritesPage";
 import RecipeDetailPage from "./pages/RecipeDetailPage";
 import PrivateRoute from "./components/PrivateRoute";
 import "./assets/scss/styles.scss";
-import { ToastContainer } from "react-toastify";
+import EditProfilePage from "./pages/EditProfilePage";
 
 const App: React.FC = () => {
   return (
@@ -27,12 +28,16 @@ const App: React.FC = () => {
               <Route path="/" element={<HomePage />} />
               <Route path="/favorites" element={<FavoritesPage />} />
               <Route path="/recipe/:id" element={<RecipeDetailPage />} />
+              <Route
+                path="/edit-profile"
+                element={<PrivateRoute element={<EditProfilePage />} />}
+              />
               <Route path="*" element={<NotFound />} />
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route
-                path="/profile"
-                element={<PrivateRoute element={<ProfilePage />} />}
+                path="/dashboard"
+                element={<PrivateRoute element={<DashboardPage />} />}
               />
             </Routes>
           </Container>

@@ -160,7 +160,7 @@ const HomePage: React.FC = () => {
           <button
             type="submit"
             disabled={loading}
-            className="mt-3 generate-btn btn btn-primary"
+            className="mt-3 generate-btn btn btn-success"
           >
             {loading ? "Loading..." : "Generate Recipes"}
           </button>

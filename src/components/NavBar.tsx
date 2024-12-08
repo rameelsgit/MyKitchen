@@ -15,28 +15,19 @@ const NavBar: React.FC = () => {
         </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            {/* <Nav.Item>
-              <Link to="/recipes" className="nav-link">
-                Recipes
-              </Link>
-            </Nav.Item> */}
-          </Nav>
+          <Nav className="me-auto"></Nav>
           <Nav>
             {isLoggedIn ? (
               <NavDropdown title="Profile" id="profile-dropdown">
-                <NavDropdown.Item as={Link} to="/profile">
-                  View Dashboard
+                <NavDropdown.Item as={Link} to="/dashboard">
+                  Dashboard
                 </NavDropdown.Item>
-                {/* <NavDropdown.Item as={Link} to="/favorites">
-                  My Favorite Recipes
-                </NavDropdown.Item> */}
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
               </NavDropdown>
             ) : (
               <Nav.Item>
-                <Link to="/profile" className="nav-link">
+                <Link to="/dashboard" className="nav-link">
                   <LuUserCircle2 size={35} />
                 </Link>
               </Nav.Item>

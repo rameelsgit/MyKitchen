@@ -84,7 +84,7 @@ const Login: React.FC = () => {
         </Form.Group>
 
         <Button
-          variant="primary"
+          variant="success"
           type="submit"
           className="w-100 generate-btn"
           disabled={isSubmitting}
