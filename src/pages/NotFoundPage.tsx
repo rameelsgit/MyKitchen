@@ -1,15 +1,32 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { FaHome } from "react-icons/fa";
+import { Container } from "react-bootstrap";
 
 const NotFound: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="d-flex flex-column align-items-center  justify-content-center ">
+    <Container className="text-center mt-5">
       <h1>404 - Not Found</h1>
       <p>The page you are looking for does not exist.</p>
-      <Link to={"/"} replace>
-        <span>Homepage</span>
-      </Link>
-    </div>
+      <div
+        className="home-icon mb-4"
+        style={{
+          cursor: "pointer",
+        }}
+        onClick={() => navigate("/")}
+      >
+        <FaHome
+          size={45}
+          style={{
+            color: "#dc5d4d",
+          }}
+          className="home-icon"
+        />
+        <p>Return to Homepage</p>
+      </div>
+    </Container>
   );
 };
 

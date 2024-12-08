@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { fetchRecipeDetails } from "../services/spoonacularApi";
-import { Container, Button, Spinner } from "react-bootstrap";
+import { Container, Spinner, Row, Col } from "react-bootstrap";
 import DOMPurify from "dompurify";
+import { IoIosTimer } from "react-icons/io";
+import { IoPeople } from "react-icons/io5";
+import { IoArrowBackCircleSharp } from "react-icons/io5";
+import { FaHome } from "react-icons/fa";
 
 interface Ingredient {
   id: number;
@@ -15,6 +19,8 @@ interface Recipe {
   image: string;
   extendedIngredients: Ingredient[];
   instructions: string;
+  readyInMinutes: number;
+  servings: number;
 }
 
 const RecipeDetailPage: React.FC = () => {
@@ -52,39 +58,99 @@ const RecipeDetailPage: React.FC = () => {
     return (
       <Container className="text-center mt-5">
         <p>{error}</p>
-        <Button onClick={() => navigate("/")}>Back to Home</Button>
+        <div
+          className="home-icon mb-4"
+          style={{
+            cursor: "pointer",
+          }}
+          onClick={() => navigate("/")}
+        >
+          <FaHome
+            size={45}
+            style={{
+              color: "#dc5d4d",
+            }}
+            className="home-icon"
+          />
+          <p>Return to Homepage</p>
+        </div>
       </Container>
     );
   }
 
   return (
     <Container className="mt-5">
-      <Button onClick={() => navigate(-1)} className="mb-4">
-        Go Back
-      </Button>
-      <h2>{recipe?.title}</h2>
-      <img
-        src={recipe?.image}
-        alt={recipe?.title}
-        style={{ width: "100%", maxHeight: "400px", objectFit: "cover" }}
-        className="mb-4"
-      />
-      <h4>Ingredients:</h4>
-      <ul>
-        {recipe?.extendedIngredients.map((ingredient: Ingredient) => (
-          <li key={ingredient.id}>
-            {ingredient.original} ({ingredient.name})
-          </li>
-        ))}
-      </ul>
-      <h4>Instructions:</h4>
       <div
-        dangerouslySetInnerHTML={{
-          __html: DOMPurify.sanitize(
-            recipe?.instructions || "No instructions provided."
-          ),
-        }}
-      />
+        className=" backicon mb-4"
+        style={{ cursor: "pointer" }}
+        onClick={() => navigate(-1)}
+      >
+        <IoArrowBackCircleSharp
+          size={45}
+          style={{
+            color: "#dc5d4d",
+            transition: "transform 0.5s ease, color 0.3s ease",
+            cursor: "pointer",
+          }}
+        />
+      </div>
+      <h2 className="text-center mb-4 fw-bold ">{recipe?.title}</h2>
+      <Row>
+        <Col md={5} className="mb-4 mb-md-0">
+          <img
+            src={recipe?.image}
+            alt={recipe?.title}
+            style={{
+              width: "90%",
+              height: "auto",
+              borderRadius: "12px",
+              objectFit: "cover",
+            }}
+          />
+          <div className="mt-4">
+            <Row className="text-center">
+              <Col>
+                <h5>
+                  <IoIosTimer
+                    size={24}
+                    style={{ color: "#dc5d4d", marginRight: "8px" }}
+                  />
+                  Total Time
+                </h5>
+                <p>{recipe?.readyInMinutes} minutes</p>
+              </Col>
+              <Col>
+                <h5>
+                  <IoPeople
+                    size={24}
+                    style={{ color: "#dc5d4d", marginRight: "8px" }}
+                  />
+                  Servings
+                </h5>
+                <p>{recipe?.servings}</p>
+              </Col>
+            </Row>
+          </div>
+        </Col>
+        <Col md={7}>
+          <h4>Ingredients:</h4>
+          <ul>
+            {recipe?.extendedIngredients.map((ingredient: Ingredient) => (
+              <li key={ingredient.id}>
+                {ingredient.original} ({ingredient.name})
+              </li>
+            ))}
+          </ul>
+          <h4 className="mt-4">Instructions:</h4>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(
+                recipe?.instructions || "No instructions provided."
+              ),
+            }}
+          />
+        </Col>
+      </Row>
     </Container>
   );
 };
