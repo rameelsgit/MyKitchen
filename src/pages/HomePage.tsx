@@ -8,6 +8,7 @@ import "../assets/scss/styles.scss";
 import cookingImage from "../assets/images/cooking.png";
 import { CgMoreR } from "react-icons/cg";
 import { useAuth } from "../context/AuthContext";
+import { Link } from "react-router-dom";
 
 interface Recipe {
   id: number;
@@ -169,37 +170,42 @@ const HomePage: React.FC = () => {
 
       <div ref={resultsRef} style={{ marginTop: "40px" }}>
         {recipes.length > 0 && (
-          <Row className="mt-4">
+          <Row className="mt-4 g-4">
             {recipes.map((recipe) => {
               const isFavorite = favorites.some((fav) => fav.id === recipe.id);
               return (
                 <Col key={recipe.id} sm={6} md={4} lg={2}>
-                  <Card className="recipe-card">
-                    <Card.Img
-                      variant="top"
-                      src={recipe.image}
-                      alt={recipe.title}
-                      className="recipe-image"
-                    />
-                    <Card.Body>
-                      <Card.Title>{recipe.title}</Card.Title>
-                      {isFavorite ? (
-                        <FaHeart
-                          className="favorite-icon"
-                          size={24}
-                          onClick={() => handleFavoriteToggle(recipe)}
-                          style={{ cursor: "pointer", color: "#dc5d4d" }}
-                        />
-                      ) : (
-                        <FaRegHeart
-                          className="favorite-icon"
-                          size={24}
-                          onClick={() => handleFavoriteToggle(recipe)}
-                          style={{ cursor: "pointer", color: "#dc5d4d" }}
-                        />
-                      )}
-                    </Card.Body>
-                  </Card>
+                  <Link
+                    to={`/recipe/${recipe.id}`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <Card className="recipe-card">
+                      <Card.Img
+                        variant="top"
+                        src={recipe.image}
+                        alt={recipe.title}
+                        className="recipe-image"
+                      />
+                      <Card.Body>
+                        <Card.Title>{recipe.title}</Card.Title>
+                        {isFavorite ? (
+                          <FaHeart
+                            className="favorite-icon"
+                            size={24}
+                            onClick={() => handleFavoriteToggle(recipe)}
+                            style={{ cursor: "pointer", color: "#dc5d4d" }}
+                          />
+                        ) : (
+                          <FaRegHeart
+                            className="favorite-icon"
+                            size={24}
+                            onClick={() => handleFavoriteToggle(recipe)}
+                            style={{ cursor: "pointer", color: "#dc5d4d" }}
+                          />
+                        )}
+                      </Card.Body>
+                    </Card>
+                  </Link>
                 </Col>
               );
             })}

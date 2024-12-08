@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { fetchRecipeDetails } from "../services/spoonacularApi";
 import { Container, Button, Spinner } from "react-bootstrap";
+import DOMPurify from "dompurify";
 
 interface Ingredient {
   id: number;
@@ -77,7 +78,13 @@ const RecipeDetailPage: React.FC = () => {
         ))}
       </ul>
       <h4>Instructions:</h4>
-      <p>{recipe?.instructions || "No instructions provided."}</p>
+      <div
+        dangerouslySetInnerHTML={{
+          __html: DOMPurify.sanitize(
+            recipe?.instructions || "No instructions provided."
+          ),
+        }}
+      />
     </Container>
   );
 };
