@@ -4,6 +4,7 @@ import { Container, Button, Form, Alert, Row, Col } from "react-bootstrap";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { EmailAuthProvider, reauthenticateWithCredential } from "firebase/auth";
+import { FaUserEdit } from "react-icons/fa";
 
 const EditProfile: React.FC = () => {
   const { user, setDisplayName, updateUserPassword } = useAuth();
@@ -92,7 +93,10 @@ const EditProfile: React.FC = () => {
 
   return (
     <Container className="mt-5 text-center">
-      <h2>Edit Profile</h2>
+      <h2>
+        <FaUserEdit size={30} style={{ marginRight: "15px" }} />
+        Edit Profile
+      </h2>
 
       {success && <Alert variant="success">{success}</Alert>}
 

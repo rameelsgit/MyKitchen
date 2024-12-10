@@ -48,7 +48,11 @@ const RecipeDetailPage: React.FC = () => {
   if (loading) {
     return (
       <Container className="text-center mt-5">
-        <Spinner animation="border" />
+        <Spinner
+          animation="grow"
+          className="custom-spinner"
+          style={{ color: "#dc5d4d" }}
+        />
         <p>Loading recipe details...</p>
       </Container>
     );
@@ -86,6 +90,7 @@ const RecipeDetailPage: React.FC = () => {
         onClick={() => navigate(-1)}
       >
         <IoArrowBackCircleSharp
+          className="arrow-hover"
           size={45}
           style={{
             color: "#dc5d4d",
@@ -108,7 +113,7 @@ const RecipeDetailPage: React.FC = () => {
             }}
           />
           <div className="mt-4">
-            <Row className="text-center">
+            <Row className="text-center custom-left-margin">
               <Col>
                 <h5>
                   <IoIosTimer

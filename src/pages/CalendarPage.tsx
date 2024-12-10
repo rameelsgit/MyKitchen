@@ -5,6 +5,7 @@ import { BsPlus } from "react-icons/bs";
 import { useFavorites } from "../context/FavoritesContext";
 import AddMealModal from "../components/AddMealModal";
 import { TbTrashX } from "react-icons/tb";
+import { BsCalendar3 } from "react-icons/bs";
 
 interface MealPlan {
   [key: string]: string[];
@@ -89,7 +90,10 @@ const CalendarPage: React.FC = () => {
 
   return (
     <Container className="mt-5">
-      <h2 className="text-center">Calendar</h2>
+      <h2 className="text-center" style={{ fontSize: "2rem" }}>
+        <BsCalendar3 size={25} style={{ marginRight: "15px" }} />
+        Calendar
+      </h2>
       <div className="mt-4">
         {dates.map((date) => {
           const dateKey = format(date, "yyyy-MM-dd");
