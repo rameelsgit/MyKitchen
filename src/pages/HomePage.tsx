@@ -175,11 +175,11 @@ const HomePage: React.FC = () => {
               const isFavorite = favorites.some((fav) => fav.id === recipe.id);
               return (
                 <Col key={recipe.id} sm={6} md={4} lg={2}>
-                  <Link
-                    to={`/recipe/${recipe.id}`}
-                    style={{ textDecoration: "none" }}
-                  >
-                    <Card className="recipe-card">
+                  <Card className="recipe-card text-center ">
+                    <Link
+                      to={`/recipe/${recipe.id}`}
+                      style={{ textDecoration: "none" }}
+                    >
                       <Card.Img
                         variant="top"
                         src={recipe.image}
@@ -187,25 +187,37 @@ const HomePage: React.FC = () => {
                         className="recipe-image"
                       />
                       <Card.Body>
-                        <Card.Title>{recipe.title}</Card.Title>
-                        {isFavorite ? (
-                          <FaHeart
-                            className="favorite-icon"
-                            size={24}
-                            onClick={() => handleFavoriteToggle(recipe)}
-                            style={{ cursor: "pointer", color: "#dc5d4d" }}
-                          />
-                        ) : (
-                          <FaRegHeart
-                            className="favorite-icon"
-                            size={24}
-                            onClick={() => handleFavoriteToggle(recipe)}
-                            style={{ cursor: "pointer", color: "#dc5d4d" }}
-                          />
-                        )}
+                        <Card.Title style={{ color: "black" }}>
+                          {recipe.title}
+                        </Card.Title>
                       </Card.Body>
-                    </Card>
-                  </Link>
+                    </Link>
+                    <div className="favorite-icon-container">
+                      {isFavorite ? (
+                        <FaHeart
+                          className="favorite-icon"
+                          size={24}
+                          onClick={(e) => {
+                            e.stopPropagation(); 
+                            e.preventDefault();  
+                            handleFavoriteToggle(recipe);
+                          }}
+                          style={{ cursor: "pointer", color: "#dc5d4d" }}
+                        />
+                      ) : (
+                        <FaRegHeart
+                          className="favorite-icon"
+                          size={24}
+                          onClick={(e) => {
+                            e.stopPropagation(); 
+                            e.preventDefault(); 
+                            handleFavoriteToggle(recipe);
+                          }}
+                          style={{ cursor: "pointer", color: "#dc5d4d" }}
+                        />
+                      )}
+                    </div>
+                  </Card>
                 </Col>
               );
             })}

@@ -23,7 +23,7 @@ const FavoritesPage: React.FC = () => {
       ) : (
         <Row>
           {favorites.map((recipe) => (
-            <Col key={recipe.id} sm={12} md={6} lg={4} className="mb-4">
+            <Col key={recipe.id} sm={6} md={4} lg={2} className="mb-4">
               <Card>
                 <Link
                   to={`/recipe/${recipe.id}`}

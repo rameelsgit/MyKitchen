@@ -16,6 +16,7 @@ import RecipeDetailPage from "./pages/RecipeDetailPage";
 import PrivateRoute from "./components/PrivateRoute";
 import "./assets/scss/styles.scss";
 import EditProfilePage from "./pages/EditProfilePage";
+import CalendarPage from "./pages/CalendarPage";
 
 const App: React.FC = () => {
   return (
@@ -31,6 +32,10 @@ const App: React.FC = () => {
               <Route
                 path="/edit-profile"
                 element={<PrivateRoute element={<EditProfilePage />} />}
+              />
+              <Route
+                path="/calendar"
+                element={<PrivateRoute element={<CalendarPage />} />}
               />
               <Route path="*" element={<NotFound />} />
               <Route path="/register" element={<RegisterPage />} />

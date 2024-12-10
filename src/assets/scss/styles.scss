@@ -240,3 +240,27 @@ button {
 p {
   font-size: 18px;
 }
+
+.favorite-icon-container {
+  display: flex;
+  justify-content: center;
+  padding: 9px;
+}
+
+.favorite-icon {
+  cursor: pointer;
+}
+
+// CALENDAR MEAL ITEM STYLE
+.meal-item {
+  list-style-type: none; 
+  position: relative;
+}
+
+.meal-item::before {
+  content: "•"; 
+  position: absolute;
+  left: -20px; 
+  font-size: 1em;
+  color: #dc5d4d; 
+}
