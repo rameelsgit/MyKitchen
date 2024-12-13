@@ -17,6 +17,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import "./assets/scss/styles.scss";
 import EditProfilePage from "./pages/EditProfilePage";
 import CalendarPage from "./pages/CalendarPage";
+import GroceriesPage from "./pages/GroceriesPage";
 
 const App: React.FC = () => {
   return (
@@ -29,6 +30,7 @@ const App: React.FC = () => {
               <Route path="/" element={<HomePage />} />
               <Route path="/favorites" element={<FavoritesPage />} />
               <Route path="/recipe/:id" element={<RecipeDetailPage />} />
+              <Route path="/groceries" element={<GroceriesPage />} />
               <Route
                 path="/edit-profile"
                 element={<PrivateRoute element={<EditProfilePage />} />}

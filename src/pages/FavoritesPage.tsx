@@ -9,7 +9,7 @@ const FavoritesPage: React.FC = () => {
   const { favorites, removeFavorite } = useFavorites();
 
   return (
-    <Container className="mt-5">
+    <Container className="fav-page mt-5">
       <h2 className="text-center mb-5" style={{ fontSize: "2rem" }}>
         <FaRegHeart size={25} /> Favorites
       </h2>

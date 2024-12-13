@@ -274,7 +274,167 @@ p {
   transform: scale(1.2);
 }
 
-// DETAIL PAGE, div row for ready in minues & servings
+// DETAIL PAGE, div row for ready in minutes & servings
 .custom-left-margin {
   margin-left: -40px;
+}
+
+// GROCERY page
+.groceries-page {
+  margin-top: 40px;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+
+  .grocery-list {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+    .grocery-item {
+      display: flex;
+      align-items: center;
+      font-size: 1.2rem;
+      padding: 15px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      transition: background-color 0.3s ease;
+
+      .grocery-item-text {
+        margin-left: 10px;
+      }
+
+      &:hover {
+        background-color: #f1f1f1;
+      }
+
+      &.checked {
+        background-color: #f7f7f7;
+        .grocery-item-text {
+          text-decoration: line-through;
+          color: gray;
+        }
+      }
+
+      input[type="checkbox"] {
+        margin-right: 10px;
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+
+  .btn-primary {
+    background-color: #dc5d4d;
+    border-color: #dc5d4d;
+  }
+
+  .btn-primary:hover {
+    background-color: #c54f3a;
+    border-color: #c54f3a;
+  }
+
+  .form-control {
+    font-size: 1.1rem;
+  }
+
+  // Mobilefirst for GROCERY
+  @media (max-width: 576px) {
+    .grocery-item {
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      font-size: 0.9rem;
+    }
+
+    .form-control {
+      font-size: 1rem;
+    }
+    .btn-danger {
+      font-size: 0.9rem;
+    }
+  }
+}
+
+.clear-all-container {
+  margin-top: 20px;
+}
+
+.btn-danger {
+  background-color: #dc5d4d;
+  border-color: #e74c3c;
+}
+
+.btn-danger:hover {
+  background-color: #c0392b;
+  border-color: #c0392b;
+}
+
+// GROCERY checkbox
+.custom-checkbox {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #dc5d4d;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+}
+
+.custom-checkbox:checked {
+  background-color: #dc5d4d;
+  border-color: #dc5d4d;
+  position: relative;
+}
+
+.custom-checkbox:checked::after {
+  content: "";
+  display: block;
+  width: 10px;
+  height: 10px;
+  background: white;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  border-radius: 2px;
+}
+
+.meal-checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.custom-checkbox {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #dc5d4d;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+}
+
+.custom-checkbox:checked {
+  background-color: #dc5d4d;
+  border-color: #dc5d4d;
+  position: relative;
+}
+
+.custom-checkbox:checked::after {
+  content: "";
+  display: block;
+  width: 9px;
+  height: 10px;
+  background: white;
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  border-radius: 2px;
 }

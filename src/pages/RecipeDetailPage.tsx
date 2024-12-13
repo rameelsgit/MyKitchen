@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { fetchRecipeDetails } from "../services/spoonacularApi";
-import { Container, Spinner, Row, Col } from "react-bootstrap";
+import { Container, Spinner, Row, Col, Button } from "react-bootstrap";
+import { doc, updateDoc, arrayUnion } from "firebase/firestore";
+import { auth, db } from "../firebase/firebase";
 import DOMPurify from "dompurify";
 import { IoIosTimer } from "react-icons/io";
 import { IoPeople } from "react-icons/io5";
 import { IoArrowBackCircleSharp } from "react-icons/io5";
 import { FaHome } from "react-icons/fa";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { RiShoppingBag4Line } from "react-icons/ri";
 
 interface Ingredient {
   id: number;
@@ -30,6 +35,8 @@ const RecipeDetailPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const user = auth.currentUser;
+
   useEffect(() => {
     const loadRecipeDetails = async () => {
       try {
@@ -44,6 +51,37 @@ const RecipeDetailPage: React.FC = () => {
 
     loadRecipeDetails();
   }, [id]);
+
+  const addIngredientsToGroceryList = async () => {
+    if (!user || !recipe) {
+      toast.error("You must be logged in to save ingredients.");
+      return;
+    }
+
+    const groceryDoc = doc(db, "groceryLists", user.uid);
+    try {
+      await updateDoc(groceryDoc, {
+        items: arrayUnion(
+          ...recipe.extendedIngredients.map((ingredient) => ({
+            id: ingredient.id,
+            item: ingredient.original,
+            checked: false,
+          }))
+        ),
+      });
+      toast.success(
+        <>
+          Ingredients added to your grocery list!{" "}
+          <a href="/groceries" style={{ color: "#dc5d4d" }}>
+            Go to Groceries
+          </a>
+        </>
+      );
+    } catch (error) {
+      console.error("Error adding ingredients:", error);
+      toast.error("Failed to add ingredients to groceries.");
+    }
+  };
 
   if (loading) {
     return (
@@ -85,13 +123,13 @@ const RecipeDetailPage: React.FC = () => {
   return (
     <Container className="mt-5">
       <div
-        className=" backicon mb-4"
+        className="backicon mb-4"
         style={{ cursor: "pointer" }}
         onClick={() => navigate(-1)}
       >
         <IoArrowBackCircleSharp
           className="arrow-hover"
-          size={45}
+          size={50}
           style={{
             color: "#dc5d4d",
             transition: "transform 0.5s ease, color 0.3s ease",
@@ -146,6 +184,17 @@ const RecipeDetailPage: React.FC = () => {
               </li>
             ))}
           </ul>
+          <Button
+            className="mt-3"
+            style={{
+              backgroundColor: "#dc5d4d",
+              borderColor: "#dc5d4d",
+              marginLeft: 10,
+            }}
+            onClick={addIngredientsToGroceryList}
+          >
+            Add to <RiShoppingBag4Line size={26} style={{ marginTop: -6 }} />
+          </Button>
           <h4 className="mt-4">Instructions:</h4>
           <div
             dangerouslySetInnerHTML={{
@@ -156,6 +205,8 @@ const RecipeDetailPage: React.FC = () => {
           />
         </Col>
       </Row>
+
+      <ToastContainer />
     </Container>
   );
 };
