@@ -4,14 +4,16 @@ import { useFavorites } from "../context/FavoritesContext";
 import { Link } from "react-router-dom";
 import { LuPlusCircle } from "react-icons/lu";
 import { FaRegHeart } from "react-icons/fa";
+import BackArrow from "../components/BackArrow";
 
 const FavoritesPage: React.FC = () => {
   const { favorites, removeFavorite } = useFavorites();
 
   return (
     <Container className="fav-page mt-5">
+      <BackArrow />
       <h2 className="text-center mb-5" style={{ fontSize: "2rem" }}>
-        <FaRegHeart size={25} /> Favorites
+        <FaRegHeart size={25} style={{ marginBottom: "13" }} /> Favorites
       </h2>
       {favorites.length === 0 ? (
         <div>

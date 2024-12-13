@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { EmailAuthProvider, reauthenticateWithCredential } from "firebase/auth";
 import { FaUserEdit } from "react-icons/fa";
+import BackArrow from "../components/BackArrow";
 
 const EditProfile: React.FC = () => {
   const { user, setDisplayName, updateUserPassword } = useAuth();
@@ -92,9 +93,10 @@ const EditProfile: React.FC = () => {
   };
 
   return (
-    <Container className="mt-5 text-center">
-      <h2>
-        <FaUserEdit size={30} style={{ marginRight: "15px" }} />
+    <Container className="edit-page mt-5 ">
+      <BackArrow />
+      <h2 className="text-center mb-5" style={{ fontSize: "2rem" }}>
+        <FaUserEdit size={30} style={{ marginBottom: "15px" }} />
         Edit Profile
       </h2>
 

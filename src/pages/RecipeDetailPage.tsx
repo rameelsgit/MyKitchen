@@ -7,11 +7,11 @@ import { auth, db } from "../firebase/firebase";
 import DOMPurify from "dompurify";
 import { IoIosTimer } from "react-icons/io";
 import { IoPeople } from "react-icons/io5";
-import { IoArrowBackCircleSharp } from "react-icons/io5";
 import { FaHome } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { RiShoppingBag4Line } from "react-icons/ri";
+import BackArrow from "../components/BackArrow";
 
 interface Ingredient {
   id: number;
@@ -122,21 +122,7 @@ const RecipeDetailPage: React.FC = () => {
 
   return (
     <Container className="mt-5">
-      <div
-        className="backicon mb-4"
-        style={{ cursor: "pointer" }}
-        onClick={() => navigate(-1)}
-      >
-        <IoArrowBackCircleSharp
-          className="arrow-hover"
-          size={50}
-          style={{
-            color: "#dc5d4d",
-            transition: "transform 0.5s ease, color 0.3s ease",
-            cursor: "pointer",
-          }}
-        />
-      </div>
+      <BackArrow />
       <h2 className="text-center mb-4 fw-bold ">{recipe?.title}</h2>
       <Row>
         <Col md={5} className="mb-4 mb-md-0">

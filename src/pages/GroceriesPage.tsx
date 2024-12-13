@@ -3,8 +3,7 @@ import { auth, db } from "../firebase/firebase";
 import { doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { Button, Form, Row, Col, ListGroup } from "react-bootstrap";
 import { RiDeleteBin2Fill, RiShoppingBag4Line } from "react-icons/ri";
-import { IoArrowBackCircleSharp } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
+import BackArrow from "../components/BackArrow";
 
 interface GroceryItem {
   id: number;
@@ -15,7 +14,6 @@ interface GroceryItem {
 const GroceriesPage: React.FC = () => {
   const [groceryList, setGroceryList] = useState<GroceryItem[]>([]);
   const [newItem, setNewItem] = useState<string>("");
-  const navigate = useNavigate();
 
   const user = auth.currentUser;
 
@@ -83,21 +81,7 @@ const GroceriesPage: React.FC = () => {
 
   return (
     <div className="groceries-page container mt-5">
-      <div
-        className="backicon mb-4"
-        style={{ cursor: "pointer" }}
-        onClick={() => navigate(-1)}
-      >
-        <IoArrowBackCircleSharp
-          className="arrow-hover"
-          size={45}
-          style={{
-            color: "#dc5d4d",
-            transition: "transform 0.5s ease, color 0.3s ease",
-            cursor: "pointer",
-          }}
-        />
-      </div>
+      <BackArrow />
       <h2 className="text-center" style={{ fontSize: "2rem" }}>
         <RiShoppingBag4Line
           size={30}

@@ -6,6 +6,7 @@ import { useFavorites } from "../context/FavoritesContext";
 import AddMealModal from "../components/AddMealModal";
 import { TbTrashX } from "react-icons/tb";
 import { BsCalendar3 } from "react-icons/bs";
+import BackArrow from "../components/BackArrow";
 
 interface MealPlan {
   [key: string]: string[];
@@ -16,7 +17,6 @@ const CalendarPage: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [mealPlan, setMealPlan] = useState<MealPlan>({});
-
   const { favorites } = useFavorites();
 
   useEffect(() => {
@@ -89,24 +89,45 @@ const CalendarPage: React.FC = () => {
   };
 
   return (
-    <Container className="mt-5">
-      <h2 className="text-center" style={{ fontSize: "2rem" }}>
-        <BsCalendar3 size={25} style={{ marginRight: "15px" }} />
+    <Container className="mt-5 calendar-page">
+      <BackArrow />
+      <h2
+        className="text-center"
+        style={{
+          fontSize: "2rem",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <BsCalendar3
+          size={25}
+          style={{ marginRight: "10px", margin: "13px" }}
+        />
         Calendar
       </h2>
+
       <div className="mt-4">
         {dates.map((date) => {
           const dateKey = format(date, "yyyy-MM-dd");
           return (
             <Row
               key={dateKey}
-              className="align-items-center py-2 border-bottom"
+              className="align-items-center py-3 border-bottom"
+              style={{
+                marginBottom: "13px",
+                fontSize: "1.2rem",
+                padding: "15px",
+                backgroundColor: "#fff",
+                border: "1px solid #ddd",
+                borderRadius: "8px",
+              }}
             >
               <Col xs={2} className="text-center">
                 <div
                   style={{
-                    width: "45px",
-                    height: "45px",
+                    width: "50px",
+                    height: "50px",
                     backgroundColor:
                       dateKey === format(new Date(), "yyyy-MM-dd")
                         ? "#dc5d4d"
@@ -116,6 +137,7 @@ const CalendarPage: React.FC = () => {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
+                    fontSize: "1.2rem",
                   }}
                 >
                   {format(date, "EEE")}
@@ -123,18 +145,32 @@ const CalendarPage: React.FC = () => {
               </Col>
               <Col xs={8}>
                 <div>
-                  <strong>{format(date, "dd MMM yyyy")}</strong>
+                  <strong style={{ fontSize: "1.2rem" }}>
+                    {format(date, "dd MMM yyyy")}
+                  </strong>
                   <ul className="mt-2">
                     {mealPlan[dateKey]?.map((meal, index) => (
                       <li
                         key={index}
                         className="d-flex justify-content-between mb-2 meal-item"
+                        style={{
+                          fontSize: "1.1rem",
+                        }}
                       >
                         <span>{meal}</span>
                         <Button
                           variant="outline-danger"
                           size="sm"
                           onClick={() => handleRemoveMeal(date, meal)}
+                          style={{
+                            flexShrink: 0,
+                            minWidth: "35px",
+                            height: "35px",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            marginLeft: "10px",
+                          }}
                         >
                           <TbTrashX />
                         </Button>
@@ -148,6 +184,14 @@ const CalendarPage: React.FC = () => {
                   variant="outline-danger"
                   size="sm"
                   onClick={() => handleAddMeal(date)}
+                  style={{
+                    minWidth: "35px",
+                    height: "35px",
+                    fontSize: "1.2rem",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
                 >
                   <BsPlus />
                 </Button>
