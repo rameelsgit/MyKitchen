@@ -44,33 +44,50 @@ const AddMealModal: React.FC<AddMealModalProps> = ({
           {favorites.map((meal) => (
             <ListGroup.Item
               key={meal.id}
-              action
-              onClick={() => handleAddMeal(meal.title)}
               className={addedMeals.has(meal.title) ? "added-meal" : ""}
               style={{
                 backgroundColor: addedMeals.has(meal.title) ? "#d4edda" : "",
               }}
             >
-              {meal.title}
-              <Button
-                variant={
-                  addedMeals.has(meal.title) ? "success" : "outline-danger"
-                }
-                size="sm"
-                style={{ float: "right" }}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleAddMeal(meal.title);
+              <div
+                onClick={() => handleAddMeal(meal.title)}
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  cursor: "pointer",
                 }}
               >
-                {addedMeals.has(meal.title) ? <BsCheck /> : "Add"}
-              </Button>
+                {meal.title}
+                <Button
+                  variant="outline-danger"
+                  size="sm"
+                  style={{
+                    borderColor: "#dc5d4d",
+                    color: addedMeals.has(meal.title) ? "#fff" : "#dc5d4d",
+                    backgroundColor: addedMeals.has(meal.title)
+                      ? "#dc5d4d"
+                      : "",
+                    transition: "all 0.3s",
+                  }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleAddMeal(meal.title);
+                  }}
+                >
+                  {addedMeals.has(meal.title) ? <BsCheck /> : "Add"}
+                </Button>
+              </div>
             </ListGroup.Item>
           ))}
         </ListGroup>
       </Modal.Body>
       <Modal.Footer>
-        <Button className="generate-btn" onClick={onHide}>
+        <Button
+          className="generate-btn"
+          onClick={onHide}
+          variant="outline-success"
+        >
           Close
         </Button>
       </Modal.Footer>
