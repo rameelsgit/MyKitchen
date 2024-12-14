@@ -133,7 +133,7 @@ const CalendarPage: React.FC = () => {
                         ? "#dc5d4d"
                         : "#ddd",
                     color: "#fff",
-                    borderRadius: "50%",
+                    borderRadius: "25%",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",

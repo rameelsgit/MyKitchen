@@ -33,7 +33,7 @@ const FavoritesPage: React.FC = () => {
               xs={6}
               sm={6}
               md={4}
-              lg={3}
+              lg={2}
               className="mb-4 custom-favorite-card"
             >
               <Card>

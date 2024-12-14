@@ -18,6 +18,8 @@ import "./assets/scss/styles.scss";
 import EditProfilePage from "./pages/EditProfilePage";
 import CalendarPage from "./pages/CalendarPage";
 import GroceriesPage from "./pages/GroceriesPage";
+import { PiButterflyBold } from "react-icons/pi";
+import { BiCopyright } from "react-icons/bi";
 
 const App: React.FC = () => {
   return (
@@ -50,7 +52,10 @@ const App: React.FC = () => {
           </Container>
 
           <footer className="bg-light text-center py-3">
-            <Container>© {new Date().getFullYear()} MyKitchen</Container>
+            <Container>
+              <BiCopyright color="#dc5d4d" /> {new Date().getFullYear()}{" "}
+              MyKitchen <PiButterflyBold color="#dc5d4d" size={23} />
+            </Container>
           </footer>
         </div>
         <ToastContainer position="top-right" autoClose={5000} />

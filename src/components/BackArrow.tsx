@@ -13,7 +13,7 @@ const BackArrow: React.FC = () => {
     >
       <IoArrowBackCircleSharp
         className="arrow-hover"
-        size={45}
+        size={50}
         style={{
           color: "#dc5d4d",
           transition: "transform 0.5s ease, color 0.3s ease",

@@ -459,3 +459,24 @@ p {
   left: 4px;
   border-radius: 2px;
 }
+
+// NOT FOUND page
+.home-icon-container {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.home-icon-container:hover {
+  transform: scale(1.2);
+}
+
+.home-icon-container p {
+  margin-top: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.home-icon-container:hover p {
+  transform: translateY(-5px);
+}
