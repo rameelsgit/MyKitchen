@@ -174,8 +174,8 @@ const HomePage: React.FC = () => {
             {recipes.map((recipe) => {
               const isFavorite = favorites.some((fav) => fav.id === recipe.id);
               return (
-                <Col key={recipe.id} sm={6} md={4} lg={2}>
-                  <Card className="recipe-card text-center ">
+                <Col key={recipe.id} xs={6} sm={6} md={4} lg={2}>
+                  <Card className="recipe-card text-center">
                     <Link
                       to={`/recipe/${recipe.id}`}
                       style={{ textDecoration: "none" }}
@@ -198,8 +198,8 @@ const HomePage: React.FC = () => {
                           className="favorite-icon"
                           size={24}
                           onClick={(e) => {
-                            e.stopPropagation(); 
-                            e.preventDefault();  
+                            e.stopPropagation();
+                            e.preventDefault();
                             handleFavoriteToggle(recipe);
                           }}
                           style={{ cursor: "pointer", color: "#dc5d4d" }}
@@ -209,8 +209,8 @@ const HomePage: React.FC = () => {
                           className="favorite-icon"
                           size={24}
                           onClick={(e) => {
-                            e.stopPropagation(); 
-                            e.preventDefault(); 
+                            e.stopPropagation();
+                            e.preventDefault();
                             handleFavoriteToggle(recipe);
                           }}
                           style={{ cursor: "pointer", color: "#dc5d4d" }}

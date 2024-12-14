@@ -125,7 +125,10 @@ const RecipeDetailPage: React.FC = () => {
       <BackArrow />
       <h2 className="text-center mb-4 fw-bold ">{recipe?.title}</h2>
       <Row>
-        <Col md={5} className="mb-4 mb-md-0">
+        <Col
+          md={5}
+          className="mb-4 mb-md-0 d-flex flex-column align-items-center"
+        >
           <img
             src={recipe?.image}
             alt={recipe?.title}
@@ -136,31 +139,28 @@ const RecipeDetailPage: React.FC = () => {
               objectFit: "cover",
             }}
           />
-          <div className="mt-4">
-            <Row className="text-center custom-left-margin">
-              <Col>
-                <h5>
-                  <IoIosTimer
-                    size={24}
-                    style={{ color: "#dc5d4d", marginRight: "8px" }}
-                  />
-                  Total Time
-                </h5>
+          <div className="mt-4 w-100">
+            <Row className="text-center justify-content-center">
+              <Col xs={6} className="d-flex flex-column align-items-center">
+                <IoIosTimer
+                  size={24}
+                  style={{ color: "#dc5d4d", marginBottom: "7px" }}
+                />
+                <h6>Total Time</h6>
                 <p>{recipe?.readyInMinutes} minutes</p>
               </Col>
-              <Col>
-                <h5>
-                  <IoPeople
-                    size={24}
-                    style={{ color: "#dc5d4d", marginRight: "8px" }}
-                  />
-                  Servings
-                </h5>
+              <Col xs={6} className="d-flex flex-column align-items-center">
+                <IoPeople
+                  size={24}
+                  style={{ color: "#dc5d4d", marginBottom: "7px" }}
+                />
+                <h6>Servings</h6>
                 <p>{recipe?.servings}</p>
               </Col>
             </Row>
           </div>
         </Col>
+
         <Col md={7}>
           <h4>Ingredients:</h4>
           <ul>
@@ -181,8 +181,9 @@ const RecipeDetailPage: React.FC = () => {
           >
             Add to <RiShoppingBag4Line size={26} style={{ marginTop: -6 }} />
           </Button>
-          <h4 className="mt-4">Instructions:</h4>
+          <h4 className="mt-4 ">Instructions:</h4>
           <div
+            className="mb-4"
             dangerouslySetInnerHTML={{
               __html: DOMPurify.sanitize(
                 recipe?.instructions || "No instructions provided."

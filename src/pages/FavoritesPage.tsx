@@ -26,9 +26,16 @@ const FavoritesPage: React.FC = () => {
           </p>
         </div>
       ) : (
-        <Row>
+        <Row className="custom-favorites-row">
           {favorites.map((recipe) => (
-            <Col key={recipe.id} sm={6} md={4} lg={2} className="mb-4">
+            <Col
+              key={recipe.id}
+              xs={6}
+              sm={6}
+              md={4}
+              lg={3}
+              className="mb-4 custom-favorite-card"
+            >
               <Card>
                 <Link
                   to={`/recipe/${recipe.id}`}

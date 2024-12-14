@@ -22,7 +22,7 @@ const DashboardPage: React.FC = () => {
             Welcome To Your Personal Dashboard {user.displayName || user.email}!
           </p>
           <Row className="justify-content-center">
-            <Col xs={12} sm={6} md={4} lg={3} className="mb-4">
+            <Col xs={6} md={6} lg={3} className="mb-4">
               <Card
                 as={Link}
                 to="/favorites"
@@ -35,20 +35,7 @@ const DashboardPage: React.FC = () => {
                 </Card.Body>
               </Card>
             </Col>
-            <Col xs={12} sm={6} md={4} lg={3} className="mb-4">
-              <Card
-                as={Link}
-                to="/edit-profile"
-                className="text-center minimalist-card square-card shadow-sm"
-                style={{ height: "180px", borderRadius: "10px" }}
-              >
-                <Card.Body className="d-flex flex-column align-items-center justify-content-center">
-                  <FaUserEdit size={45} />
-                  <h5 className="mt-3">Edit Profile</h5>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col xs={12} sm={6} md={4} lg={3} className="mb-4">
+            <Col xs={6} md={6} lg={3} className="mb-4">
               <Card
                 as={Link}
                 to="/groceries"
@@ -61,7 +48,7 @@ const DashboardPage: React.FC = () => {
                 </Card.Body>
               </Card>
             </Col>
-            <Col xs={12} sm={6} md={4} lg={3} className="mb-4">
+            <Col xs={6} md={6} lg={3} className="mb-4">
               <Card
                 as={Link}
                 to="/calendar"
@@ -71,6 +58,19 @@ const DashboardPage: React.FC = () => {
                 <Card.Body className="d-flex flex-column align-items-center justify-content-center">
                   <BsCalendar3 size={45} />
                   <h5 className="mt-3">Calendar</h5>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col xs={6} md={6} lg={3} className="mb-4">
+              <Card
+                as={Link}
+                to="/edit-profile"
+                className="text-center minimalist-card square-card shadow-sm"
+                style={{ height: "180px", borderRadius: "10px" }}
+              >
+                <Card.Body className="d-flex flex-column align-items-center justify-content-center">
+                  <FaUserEdit size={45} />
+                  <h5 className="mt-3">Edit Profile</h5>
                 </Card.Body>
               </Card>
             </Col>

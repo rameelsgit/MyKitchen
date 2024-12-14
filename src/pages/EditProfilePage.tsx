@@ -121,7 +121,7 @@ const EditProfile: React.FC = () => {
             <Button
               variant="success"
               type="submit"
-              className="generate-btn w-100"
+              className="generate-btn w-100 mb-5"
               disabled={loading}
             >
               {loading ? "Updating..." : "Update Display Name"}
