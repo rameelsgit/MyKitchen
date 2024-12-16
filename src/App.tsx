@@ -53,8 +53,13 @@ const App: React.FC = () => {
 
           <footer className="bg-light text-center py-3">
             <Container>
-              <BiCopyright color="#dc5d4d" /> {new Date().getFullYear()}{" "}
-              MyKitchen <PiButterflyBold color="#dc5d4d" size={23} />
+              <BiCopyright style={{ marginBottom: "3" }} color="#dc5d4d" />{" "}
+              {new Date().getFullYear()} MyKitchen{" "}
+              <PiButterflyBold
+                color="#dc5d4d"
+                size={23}
+                style={{ marginBottom: "5" }}
+              />
             </Container>
           </footer>
         </div>

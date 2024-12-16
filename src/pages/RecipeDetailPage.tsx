@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { fetchRecipeDetails } from "../services/spoonacularApi";
 import { Container, Spinner, Row, Col, Button } from "react-bootstrap";
-import { doc, updateDoc, arrayUnion } from "firebase/firestore";
+import { doc, updateDoc, arrayUnion, getDoc, setDoc } from "firebase/firestore";
 import { auth, db } from "../firebase/firebase";
 import DOMPurify from "dompurify";
 import { IoIosTimer } from "react-icons/io";
@@ -60,29 +60,48 @@ const RecipeDetailPage: React.FC = () => {
 
     const groceryDoc = doc(db, "groceryLists", user.uid);
     try {
-      await updateDoc(groceryDoc, {
-        items: arrayUnion(
-          ...recipe.extendedIngredients.map((ingredient) => ({
+      const docSnap = await getDoc(groceryDoc);
+
+      if (docSnap.exists()) {
+        await updateDoc(groceryDoc, {
+          items: arrayUnion(
+            ...recipe.extendedIngredients.map((ingredient) => ({
+              id: ingredient.id,
+              item: ingredient.original,
+              checked: false,
+            }))
+          ),
+        });
+        toast.success(
+          <>
+            Ingredients added to your grocery list!{" "}
+            <a href="/groceries" style={{ color: "#dc5d4d" }}>
+              Go to Groceries
+            </a>
+          </>
+        );
+      } else {
+        await setDoc(groceryDoc, {
+          items: recipe.extendedIngredients.map((ingredient) => ({
             id: ingredient.id,
             item: ingredient.original,
             checked: false,
-          }))
-        ),
-      });
-      toast.success(
-        <>
-          Ingredients added to your grocery list!{" "}
-          <a href="/groceries" style={{ color: "#dc5d4d" }}>
-            Go to Groceries
-          </a>
-        </>
-      );
+          })),
+        });
+        toast.success(
+          <>
+            Grocery list created and ingredients added!{" "}
+            <a href="/groceries" style={{ color: "#dc5d4d" }}>
+              Go to Groceries
+            </a>
+          </>
+        );
+      }
     } catch (error) {
       console.error("Error adding ingredients:", error);
       toast.error("Failed to add ingredients to groceries.");
     }
   };
-
   if (loading) {
     return (
       <Container className="text-center mt-5">

@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { auth, db } from "../firebase/firebase";
-import { doc, onSnapshot, updateDoc } from "firebase/firestore";
+import {
+  doc,
+  onSnapshot,
+  updateDoc,
+  setDoc,
+  arrayUnion,
+} from "firebase/firestore";
 import { Button, Form, Row, Col, ListGroup } from "react-bootstrap";
 import { RiDeleteBin2Fill, RiShoppingBag4Line } from "react-icons/ri";
 import BackArrow from "../components/BackArrow";
@@ -24,9 +30,15 @@ const GroceriesPage: React.FC = () => {
 
     const unsubscribe = onSnapshot(groceryDoc, (docSnapshot) => {
       if (docSnapshot.exists()) {
-        setGroceryList(docSnapshot.data().items || []);
+        setGroceryList(docSnapshot.data()?.items || []);
       } else {
-        console.log("No grocery list found.");
+        setDoc(groceryDoc, { items: [] })
+          .then(() => {
+            setGroceryList([]);
+          })
+          .catch((error) => {
+            console.error("Error creating grocery list: ", error);
+          });
       }
     });
 
@@ -35,6 +47,7 @@ const GroceriesPage: React.FC = () => {
 
   const addNewItem = async () => {
     if (!newItem.trim()) return;
+
     const newGroceryItem = {
       id: Date.now(),
       item: newItem,
@@ -46,7 +59,9 @@ const GroceriesPage: React.FC = () => {
 
     if (user) {
       const groceryDoc = doc(db, "groceryLists", user.uid);
-      await updateDoc(groceryDoc, { items: updatedList });
+      await updateDoc(groceryDoc, {
+        items: arrayUnion(newGroceryItem),
+      });
     }
 
     setNewItem("");
