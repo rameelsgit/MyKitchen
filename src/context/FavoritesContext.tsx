@@ -10,6 +10,7 @@ import { Recipe, FavoritesContextType } from "../types/FavoritesTypes";
 import { useAuth } from "./AuthContext";
 import { db } from "../firebase/firebase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
+import { Link } from "react-router-dom";
 
 interface FavoritesProviderProps {
   children: ReactNode;
@@ -61,7 +62,22 @@ export const FavoritesProvider: React.FC<FavoritesProviderProps> = ({
         JSON.stringify(updatedFavorites)
       );
 
-      toast.success(`${recipe.title} added to favorites!`);
+      toast.success(
+        <>
+          <span style={{ fontWeight: "bold" }}>{recipe.title}</span> added to{" "}
+          <Link
+            to="/favorites"
+            style={{
+              color: "#dc5d4d",
+              textDecoration: "underline",
+              fontWeight: "bold",
+            }}
+          >
+            Favorites
+          </Link>
+          !
+        </>
+      );
     }
   };
 
