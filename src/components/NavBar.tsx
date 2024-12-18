@@ -13,7 +13,12 @@ const NavBar: React.FC = () => {
         <Link to="/" className="navbar-brand">
           MyKitchen
         </Link>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle
+          style={{
+            borderColor: "white",
+          }}
+          aria-controls="basic-navbar-nav"
+        />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto"></Nav>
           <Nav>
