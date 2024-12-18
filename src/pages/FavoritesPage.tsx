@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Card, Row, Col } from "react-bootstrap";
-import { useFavorites } from "../context/FavoritesContext";
+import { useFavorites } from "../context/hooks/useFavorites";
 import { Link } from "react-router-dom";
 import { LuPlusCircle } from "react-icons/lu";
 import { FaRegHeart } from "react-icons/fa";

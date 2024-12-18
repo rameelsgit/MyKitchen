@@ -2,12 +2,12 @@ import React, { useState, useRef, useEffect } from "react";
 import { fetchRecipesByIngredients } from "../services/spoonacularApi";
 import { Container, Form, Card, Row, Col, Spinner } from "react-bootstrap";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
-import { useFavorites } from "../context/FavoritesContext";
+import { useFavorites } from "../context/hooks/useFavorites";
 import LoginModal from "../components/LoginModal";
 import "../assets/scss/styles.scss";
 import cookingImage from "../assets/images/cooking.png";
 import { CgMoreR } from "react-icons/cg";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/useAuth";
 import { Link } from "react-router-dom";
 
 interface Recipe {

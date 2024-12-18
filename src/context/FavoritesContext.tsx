@@ -1,13 +1,7 @@
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  ReactNode,
-} from "react";
+import React, { createContext, useState, useEffect, ReactNode } from "react";
 import { toast } from "react-toastify";
 import { Recipe, FavoritesContextType } from "../types/FavoritesTypes";
-import { useAuth } from "./AuthContext";
+import { useAuth } from "../context/useAuth";
 import { db } from "../firebase/firebase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { Link } from "react-router-dom";
@@ -126,10 +120,4 @@ export const FavoritesProvider: React.FC<FavoritesProviderProps> = ({
   );
 };
 
-export const useFavorites = (): FavoritesContextType => {
-  const context = useContext(FavoritesContext);
-  if (!context) {
-    throw new Error("useFavorites must be used within a FavoritesProvider");
-  }
-  return context;
-};
+export { FavoritesContext };

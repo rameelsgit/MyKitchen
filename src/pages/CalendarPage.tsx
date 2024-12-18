@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { format, addDays, startOfWeek } from "date-fns";
 import { Container, Button, Row, Col } from "react-bootstrap";
 import { BsPlus } from "react-icons/bs";
-import { useFavorites } from "../context/FavoritesContext";
+import { useFavorites } from "../context/hooks/useFavorites";
 import AddMealModal from "../components/AddMealModal";
 import { TbTrashX } from "react-icons/tb";
 import { BsCalendar3 } from "react-icons/bs";

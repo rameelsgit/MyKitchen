@@ -1,5 +1,5 @@
 import React from "react";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/useAuth";
 import { Container, Card, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { RiShoppingBag4Line } from "react-icons/ri";
