@@ -7,9 +7,10 @@ import AddMealModal from "../components/AddMealModal";
 import { TbTrashX } from "react-icons/tb";
 import { BsCalendar3 } from "react-icons/bs";
 import BackArrow from "../components/BackArrow";
+import { Link } from "react-router-dom";
 
 interface MealPlan {
-  [key: string]: string[];
+  [key: string]: { id: string; title: string }[];
 }
 
 const CalendarPage: React.FC = () => {
@@ -61,7 +62,7 @@ const CalendarPage: React.FC = () => {
     setSelectedDate(null);
   };
 
-  const handleSelectMeal = (mealTitle: string) => {
+  const handleSelectMeal = (mealTitle: string, mealId: string) => {
     if (!selectedDate) return;
 
     const dateKey = format(selectedDate, "yyyy-MM-dd");
@@ -69,20 +70,20 @@ const CalendarPage: React.FC = () => {
     setMealPlan((prev) => {
       const updatedMealPlan = { ...prev };
       if (!updatedMealPlan[dateKey]) {
-        updatedMealPlan[dateKey] = [mealTitle];
-      } else if (!updatedMealPlan[dateKey].includes(mealTitle)) {
-        updatedMealPlan[dateKey].push(mealTitle);
+        updatedMealPlan[dateKey] = [{ title: mealTitle, id: mealId }];
+      } else if (!updatedMealPlan[dateKey].some((meal) => meal.id === mealId)) {
+        updatedMealPlan[dateKey].push({ title: mealTitle, id: mealId });
       }
       return updatedMealPlan;
     });
   };
 
-  const handleRemoveMeal = (date: Date, mealTitle: string) => {
+  const handleRemoveMeal = (date: Date, mealId: string) => {
     const dateKey = format(date, "yyyy-MM-dd");
     setMealPlan((prev) => {
       const updatedMealPlan = { ...prev };
       updatedMealPlan[dateKey] = updatedMealPlan[dateKey]?.filter(
-        (meal) => meal !== mealTitle
+        (meal) => meal.id !== mealId
       );
       return updatedMealPlan;
     });
@@ -149,19 +150,29 @@ const CalendarPage: React.FC = () => {
                     {format(date, "dd MMM yyyy")}
                   </strong>
                   <ul className="mt-2">
-                    {mealPlan[dateKey]?.map((meal, index) => (
+                    {mealPlan[dateKey]?.map((meal) => (
                       <li
-                        key={index}
+                        key={meal.id}
                         className="d-flex justify-content-between mb-2 meal-item"
                         style={{
                           fontSize: "1.1rem",
                         }}
                       >
-                        <span>{meal}</span>
+                        <span>
+                          <Link
+                            to={`/recipe/${meal.id}`}
+                            style={{
+                              textDecoration: "none",
+                              color: "inherit",
+                            }}
+                          >
+                            {meal.title}
+                          </Link>
+                        </span>
                         <Button
                           variant="outline-danger"
                           size="sm"
-                          onClick={() => handleRemoveMeal(date, meal)}
+                          onClick={() => handleRemoveMeal(date, meal.id)}
                           style={{
                             flexShrink: 0,
                             minWidth: "35px",
@@ -204,8 +215,11 @@ const CalendarPage: React.FC = () => {
       <AddMealModal
         show={showModal}
         onHide={handleCloseModal}
-        onAddMeal={handleSelectMeal}
-        favorites={favorites}
+        onAddMeal={(mealTitle, mealId) => handleSelectMeal(mealTitle, mealId)}
+        favorites={favorites.map((meal) => ({
+          id: meal.id.toString(),
+          title: meal.title,
+        }))}
       />
     </Container>
   );

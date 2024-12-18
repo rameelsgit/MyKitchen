@@ -6,8 +6,8 @@ import { PiBowlFoodDuotone } from "react-icons/pi";
 interface AddMealModalProps {
   show: boolean;
   onHide: () => void;
-  onAddMeal: (meal: string) => void;
-  favorites: { id: number; title: string }[];
+  onAddMeal: (mealTitle: string, mealId: string) => void;
+  favorites: { id: string; title: string }[];
 }
 
 const AddMealModal: React.FC<AddMealModalProps> = ({
@@ -18,8 +18,8 @@ const AddMealModal: React.FC<AddMealModalProps> = ({
 }) => {
   const [addedMeals, setAddedMeals] = useState<Set<string>>(new Set());
 
-  const handleAddMeal = (mealTitle: string) => {
-    onAddMeal(mealTitle);
+  const handleAddMeal = (mealTitle: string, mealId: string) => {
+    onAddMeal(mealTitle, mealId);
     setAddedMeals((prev) => new Set(prev).add(mealTitle));
   };
 
@@ -50,7 +50,7 @@ const AddMealModal: React.FC<AddMealModalProps> = ({
               }}
             >
               <div
-                onClick={() => handleAddMeal(meal.title)}
+                onClick={() => handleAddMeal(meal.title, meal.id)}
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
@@ -72,7 +72,7 @@ const AddMealModal: React.FC<AddMealModalProps> = ({
                   }}
                   onClick={(e) => {
                     e.stopPropagation();
-                    handleAddMeal(meal.title);
+                    handleAddMeal(meal.title, meal.id);
                   }}
                 >
                   {addedMeals.has(meal.title) ? <BsCheck /> : "Add"}

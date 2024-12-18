@@ -41,6 +41,10 @@ const App: React.FC = () => {
                 path="/calendar"
                 element={<PrivateRoute element={<CalendarPage />} />}
               />
+              <Route
+                path="/recipe/:recipeTitle"
+                element={<RecipeDetailPage />}
+              />
               <Route path="*" element={<NotFound />} />
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/login" element={<LoginPage />} />
