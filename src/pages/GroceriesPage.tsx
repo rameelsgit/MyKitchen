@@ -130,14 +130,20 @@ const GroceriesPage: React.FC = () => {
               className={`grocery-item d-flex align-items-center mb-3 ${
                 item.checked ? "checked" : ""
               }`}
+              style={{ padding: "10px" }}
             >
-              <input
-                type="checkbox"
-                checked={item.checked || false}
-                onChange={() => toggleItemCheck(item.id)}
-                className="custom-checkbox mr-2"
-              />
-              <span className="grocery-item-text">{item.item}</span>
+              <div className="d-flex align-items-center w-100">
+                <input
+                  type="checkbox"
+                  checked={item.checked || false}
+                  onChange={() => toggleItemCheck(item.id)}
+                  className="custom-checkbox me-3"
+                  style={{ flexShrink: 0 }}
+                />
+                <span className="grocery-item-text text-wrap w-100">
+                  {item.item}
+                </span>
+              </div>
             </ListGroup.Item>
           ))}
         </ListGroup>
