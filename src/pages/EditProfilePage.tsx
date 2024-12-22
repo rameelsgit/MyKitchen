@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { EmailAuthProvider, reauthenticateWithCredential } from "firebase/auth";
 import { FaUserEdit } from "react-icons/fa";
 import BackArrow from "../components/BackArrow";
+import { scale } from "../utils/scalingUtils";
 
 const EditProfile: React.FC = () => {
   const { user, setDisplayName, updateUserPassword } = useAuth();
@@ -115,6 +116,7 @@ const EditProfile: React.FC = () => {
                 value={displayName}
                 onChange={(e) => setDisplayNameState(e.target.value)}
                 required
+                style={{ fontSize: scale(14), padding: scale(12) }}
               />
             </Form.Group>
 
@@ -123,6 +125,7 @@ const EditProfile: React.FC = () => {
               type="submit"
               className="generate-btn w-100 mb-5"
               disabled={loading}
+              style={{ fontSize: scale(14), padding: scale(12) }}
             >
               {loading ? "Updating..." : "Update Display Name"}
             </Button>
@@ -134,7 +137,7 @@ const EditProfile: React.FC = () => {
             style={{
               borderLeft: "2px solid #ddd",
               height: "100%",
-              margin: "0 15px",
+              margin: `0 ${scale(15)}px`,
             }}
           ></div>
         </Col>
@@ -149,6 +152,7 @@ const EditProfile: React.FC = () => {
                 value={currentPassword}
                 onChange={(e) => setCurrentPassword(e.target.value)}
                 required
+                style={{ fontSize: scale(14), padding: scale(12) }}
               />
             </Form.Group>
 
@@ -160,6 +164,7 @@ const EditProfile: React.FC = () => {
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
                 required
+                style={{ fontSize: scale(14), padding: scale(12) }}
               />
             </Form.Group>
 
@@ -171,6 +176,7 @@ const EditProfile: React.FC = () => {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
+                style={{ fontSize: scale(14), padding: scale(12) }}
               />
             </Form.Group>
 
@@ -179,6 +185,7 @@ const EditProfile: React.FC = () => {
               type="submit"
               className="w-100 generate-btn"
               disabled={loading}
+              style={{ fontSize: scale(14), padding: scale(12) }}
             >
               {loading ? "Updating..." : "Update Password"}
             </Button>

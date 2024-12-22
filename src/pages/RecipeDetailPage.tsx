@@ -102,9 +102,13 @@ const RecipeDetailPage: React.FC = () => {
       toast.error("Failed to add ingredients to groceries.");
     }
   };
+
   if (loading) {
     return (
-      <Container className="text-center mt-5">
+      <Container
+        className="text-center mt-5"
+        style={{ maxWidth: "900px", margin: "0 auto" }}
+      >
         <Spinner
           animation="grow"
           className="custom-spinner"
@@ -117,7 +121,10 @@ const RecipeDetailPage: React.FC = () => {
 
   if (error) {
     return (
-      <Container className="text-center mt-5">
+      <Container
+        className="text-center mt-5"
+        style={{ maxWidth: "900px", margin: "0 auto" }}
+      >
         <p>{error}</p>
         <div
           className="home-icon mb-4"
@@ -140,7 +147,7 @@ const RecipeDetailPage: React.FC = () => {
   }
 
   return (
-    <Container className="mt-5">
+    <Container className="mt-5" style={{ maxWidth: "940px", margin: "0 auto" }}>
       <BackArrow />
       <h2 className="text-center mb-4 fw-bold ">{recipe?.title}</h2>
       <Row>
@@ -198,7 +205,7 @@ const RecipeDetailPage: React.FC = () => {
             }}
             onClick={addIngredientsToGroceryList}
           >
-            Add to <RiShoppingBag4Line size={26} style={{ marginTop: -6 }} />
+            Add to <RiShoppingBag4Line size={24} style={{ marginTop: -6 }} />
           </Button>
           <h4 className="mt-4 ">Instructions:</h4>
           <div

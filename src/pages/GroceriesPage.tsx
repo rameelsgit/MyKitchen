@@ -95,7 +95,10 @@ const GroceriesPage: React.FC = () => {
   };
 
   return (
-    <div className="groceries-page container mt-5">
+    <div
+      className="groceries-page container mt-5"
+      style={{ maxWidth: "900px", margin: "0 auto" }}
+    >
       <BackArrow />
       <h2 className="text-center" style={{ fontSize: "2rem" }}>
         <RiShoppingBag4Line
@@ -156,7 +159,7 @@ const GroceriesPage: React.FC = () => {
             onClick={clearAllItems}
             className="w-100 d-flex align-items-center justify-content-center"
           >
-            <RiDeleteBin2Fill className="mr-2" size={30} />
+            <RiDeleteBin2Fill className="mr-2" size={20} />
             Clear All
           </Button>
         </div>

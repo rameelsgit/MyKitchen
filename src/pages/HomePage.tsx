@@ -142,7 +142,7 @@ const HomePage: React.FC = () => {
         <h1>MyKitchen</h1>
       </header>
 
-      <Container className="mt-5 text-center fade-in">
+      <Container className="mt-4 text-center fade-in">
         <h2>Generate Recipes Based on Ingredients</h2>
         <Form
           onSubmit={(e) => {
@@ -196,7 +196,7 @@ const HomePage: React.FC = () => {
                       {isFavorite ? (
                         <FaHeart
                           className="favorite-icon"
-                          size={24}
+                          size={22}
                           onClick={(e) => {
                             e.stopPropagation();
                             e.preventDefault();
@@ -207,7 +207,7 @@ const HomePage: React.FC = () => {
                       ) : (
                         <FaRegHeart
                           className="favorite-icon"
-                          size={24}
+                          size={22}
                           onClick={(e) => {
                             e.stopPropagation();
                             e.preventDefault();
@@ -244,7 +244,7 @@ const HomePage: React.FC = () => {
               ) : (
                 <CgMoreR
                   style={{ marginRight: "8px", color: "#dc5d4d" }}
-                  size={30}
+                  size={24}
                 />
               )}
               Load More

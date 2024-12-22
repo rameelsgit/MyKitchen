@@ -1,8 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Buenard:wght@400;700&family=Lora:wght@500;600&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
+// Scaling factor for responsive design
+$scale-factor: 0.75;
+
 body {
   font-family: "Buenard", serif;
 }
+
 // NAVBAR
 
 $navbar-bg-color: #dc5d4d;
@@ -24,7 +28,7 @@ $navbar-hover-color: rgba(255, 255, 255, 0.8);
 
 .nav-link {
   color: $navbar-link-color !important;
-  font-size: 1rem;
+  font-size: calc(1rem * $scale-factor);
 
   &:hover {
     color: $navbar-hover-color !important;
@@ -63,6 +67,7 @@ $navbar-hover-color: rgba(255, 255, 255, 0.8);
   background-color: transparent !important;
   color: inherit !important;
   box-shadow: none !important;
+  font-size: 0.9rem !important;
 }
 
 // HEADER
@@ -72,7 +77,7 @@ header {
   padding: 0;
   background-color: #dc5d4d;
   text-align: center;
-  border-bottom: 1px solid transparent;
+  border-bottom: calc(1px * $scale-factor) solid transparent;
   width: 100%;
 }
 
@@ -85,9 +90,9 @@ header {
 }
 
 header img {
-  margin-top: 1em;
+  margin-top: calc(1em * $scale-factor);
   display: inline-block;
-  max-width: 1200px;
+  max-width: calc(1200px * $scale-factor);
   width: 100%;
   height: auto;
 }
@@ -101,9 +106,10 @@ img {
 
 .minimalist-card {
   background-color: #ffffff;
-  border: 1px solid #ddd;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 25px;
+  border: calc(1px * $scale-factor) solid #ddd;
+  box-shadow: 0 calc(2px * $scale-factor) calc(8px * $scale-factor)
+    rgba(0, 0, 0, 0.1);
+  border-radius: calc(25px * $scale-factor);
   padding: 0;
   transition: all 0.3s ease;
   display: flex;
@@ -111,8 +117,9 @@ img {
   align-items: center;
 
   &:hover {
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-    transform: translateY(-5px);
+    box-shadow: 0 calc(6px * $scale-factor) calc(15px * $scale-factor)
+      rgba(0, 0, 0, 0.1);
+    transform: translateY(calc(-5px * $scale-factor));
   }
 
   .card-body {
@@ -120,14 +127,14 @@ img {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 15px;
+    padding: calc(15px * $scale-factor);
   }
 
   h5 {
-    font-size: 1.2rem;
+    font-size: calc(1.2rem * $scale-factor);
     font-weight: 600;
     color: #dc5d4d;
-    margin-top: 15px;
+    margin-top: calc(15px * $scale-factor);
   }
 
   svg {
@@ -152,7 +159,7 @@ img {
 
 // Welcome
 .text-center {
-  font-size: 1.2rem;
+  font-size: calc(1.2rem * $scale-factor);
   font-weight: 500;
   color: #666;
 }
@@ -164,48 +171,49 @@ img {
 }
 
 .col {
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: calc(15px * $scale-factor);
+  padding-right: calc(15px * $scale-factor);
 }
 
 // Center text for header and h2
 header {
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: calc(50px * $scale-factor);
 }
 
 h1 {
-  font-size: 3rem;
+  font-size: calc(3rem * $scale-factor);
   color: #ffffff;
-  margin-bottom: 2rem;
+  margin-bottom: calc(1.5rem * $scale-factor);
   font-weight: 700;
 }
 
-// h2 {
-//   // font-size: 2rem;
-//   margin-bottom: 20px;
-//   color: #5b4d4d;
-// }
+h2 {
+  font-size: calc(2rem * $scale-factor);
+  margin-bottom: calc(20px * $scale-factor);
+  color: #5b4d4d;
+}
 
 // Search bar
 .search-bar {
-  width: 60%;
+  width: calc(60% * $scale-factor);
   margin: 0 auto;
-  padding: 10px;
-  font-size: 1rem;
-  border-radius: 30px;
-  border: 2px solid #ddd;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: calc(10px * $scale-factor);
+  font-size: calc(1rem * $scale-factor);
+  border-radius: calc(30px * $scale-factor);
+  border: calc(2px * $scale-factor) solid #ddd;
+  margin-bottom: calc(20px * $scale-factor);
+  box-shadow: 0 calc(2px * $scale-factor) calc(5px * $scale-factor)
+    rgba(0, 0, 0, 0.1);
 }
 
 // Button styling
 .generate-btn {
   background-color: #dc5d4d;
-  border-radius: 30px;
-  padding: 10px 20px;
+  border-radius: calc(30px * $scale-factor);
+  padding: calc(10px * $scale-factor) calc(20px * $scale-factor);
   color: white;
-  font-size: 1rem;
+  font-size: calc(1rem * $scale-factor);
   border: none;
   transition: background-color 0.3s ease-in-out;
 }
@@ -215,17 +223,18 @@ h1 {
 }
 
 button {
-  font-size: 1rem;
-  border-radius: 25px;
-  padding: 8px 16px;
+  font-size: calc(1rem * $scale-factor);
+  border-radius: calc(25px * $scale-factor);
+  padding: calc(8px * $scale-factor) calc(16px * $scale-factor);
 }
 
 // Recipe Card
 .card {
   border: none;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px calc(4px * $scale-factor) calc(12px * $scale-factor)
+    rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
-  border-radius: 12px;
+  border-radius: calc(12px * $scale-factor);
 }
 
 .card:hover {
@@ -233,7 +242,7 @@ button {
 }
 
 .card-body {
-  padding: 15px;
+  padding: calc(15px * $scale-factor);
 }
 
 // Add favorite button
@@ -248,13 +257,13 @@ button {
 }
 
 p {
-  font-size: 18px;
+  font-size: calc(18px * $scale-factor);
 }
 
 .favorite-icon-container {
   display: flex;
   justify-content: center;
-  padding: 9px;
+  padding: calc(9px * $scale-factor);
 }
 
 .favorite-icon {
@@ -270,8 +279,8 @@ p {
 .meal-item::before {
   content: "•";
   position: absolute;
-  left: -20px;
-  font-size: 1em;
+  left: calc(-20px * $scale-factor);
+  font-size: calc(1em * $scale-factor);
   color: #dc5d4d;
 }
 
@@ -286,7 +295,7 @@ p {
 
 // DETAIL PAGE, div row for ready in minutes & servings
 .custom-left-margin {
-  margin-left: -40px;
+  margin-left: calc(-40px * $scale-factor);
 }
 
 // EDIT PAGE
@@ -296,6 +305,7 @@ p {
     color: #666;
   }
 }
+
 // FAV PAGE h2
 .fav-page {
   h2 {
@@ -303,40 +313,40 @@ p {
   }
 }
 
-// CALENDAR PAFGE h2
+// CALENDAR PAGE h2
 .calendar-page {
   h2 {
     font-weight: 600;
   }
 }
 
-// GROCERY page
+// GROCERY PAGE
 .groceries-page {
-  margin-top: 40px;
+  margin-top: calc(40px * $scale-factor);
 
   h2 {
-    font-size: 2rem;
+    font-size: calc(2rem * $scale-factor);
     font-weight: 600;
   }
 
   .grocery-list {
     background-color: #ffffff;
-    border-radius: 10px;
-    padding: 10px;
+    border-radius: calc(10px * $scale-factor);
+    padding: calc(10px * $scale-factor);
 
     .grocery-item {
       display: flex;
       align-items: center;
-      font-size: 1.2rem;
-      padding: 15px;
+      font-size: calc(1.2rem * $scale-factor);
+      padding: calc(15px * $scale-factor);
       background-color: #fff;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      margin-bottom: 10px;
+      border: calc(1px * $scale-factor) solid #ddd;
+      border-radius: calc(8px * $scale-factor);
+      margin-bottom: calc(10px * $scale-factor);
       transition: background-color 0.3s ease;
 
       .grocery-item-text {
-        margin-left: 10px;
+        margin-left: calc(10px * $scale-factor);
       }
 
       &:hover {
@@ -352,9 +362,9 @@ p {
       }
 
       input[type="checkbox"] {
-        margin-right: 10px;
-        width: 20px;
-        height: 20px;
+        margin-right: calc(10px * $scale-factor);
+        width: calc(20px * $scale-factor);
+        height: calc(20px * $scale-factor);
       }
     }
   }
@@ -370,30 +380,31 @@ p {
   }
 
   .form-control {
-    font-size: 1.1rem;
+    font-size: calc(1.1rem * $scale-factor);
   }
 
-  // Mobilefirst for GROCERY
-  @media (max-width: 576px) {
+  // Mobile-first for GROCERY
+  @media (max-width: calc(576px * $scale-factor)) {
     .grocery-item {
-      font-size: 1rem;
+      font-size: calc(1rem * $scale-factor);
     }
 
     .btn-primary {
-      font-size: 0.9rem;
+      font-size: calc(0.9rem * $scale-factor);
     }
 
     .form-control {
-      font-size: 1rem;
+      font-size: calc(1rem * $scale-factor);
     }
+
     .btn-danger {
-      font-size: 0.9rem;
+      font-size: calc(0.9rem * $scale-factor);
     }
   }
 }
 
 .clear-all-container {
-  margin-top: 20px;
+  margin-top: calc(20px * $scale-factor);
 }
 
 .btn-danger {
@@ -409,10 +420,10 @@ p {
 // GROCERY checkbox
 .custom-checkbox {
   appearance: none;
-  width: 20px;
-  height: 20px;
-  border: 2px solid #dc5d4d;
-  border-radius: 4px;
+  width: calc(20px * $scale-factor);
+  height: calc(20px * $scale-factor);
+  border: calc(2px * $scale-factor) solid #dc5d4d;
+  border-radius: calc(4px * $scale-factor);
   outline: none;
   cursor: pointer;
 }
@@ -426,47 +437,19 @@ p {
 .custom-checkbox:checked::after {
   content: "";
   display: block;
-  width: 10px;
-  height: 10px;
+  width: calc(10px * $scale-factor);
+  height: calc(10px * $scale-factor);
   background: white;
   position: absolute;
-  top: 4px;
-  left: 4px;
-  border-radius: 2px;
+  top: calc(4px * $scale-factor);
+  left: calc(4px * $scale-factor);
+  border-radius: calc(2px * $scale-factor);
 }
 
 .meal-checkbox-wrapper {
   display: flex;
   align-items: center;
-  gap: 10px;
-}
-
-.custom-checkbox {
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  border: 2px solid #dc5d4d;
-  border-radius: 4px;
-  outline: none;
-  cursor: pointer;
-}
-
-.custom-checkbox:checked {
-  background-color: #dc5d4d;
-  border-color: #dc5d4d;
-  position: relative;
-}
-
-.custom-checkbox:checked::after {
-  content: "";
-  display: block;
-  width: 9px;
-  height: 10px;
-  background: white;
-  position: absolute;
-  top: 3px;
-  left: 4px;
-  border-radius: 2px;
+  gap: calc(10px * $scale-factor);
 }
 
 // NOT FOUND page
@@ -482,10 +465,10 @@ p {
 }
 
 .home-icon-container p {
-  margin-top: 10px;
+  margin-top: calc(10px * $scale-factor);
   transition: transform 0.3s ease-in-out;
 }
 
 .home-icon-container:hover p {
-  transform: translateY(-5px);
+  transform: translateY(calc(-5px * $scale-factor));
 }

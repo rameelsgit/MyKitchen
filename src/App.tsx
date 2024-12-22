@@ -61,7 +61,7 @@ const App: React.FC = () => {
               {new Date().getFullYear()} MyKitchen{" "}
               <PiButterflyBold
                 color="#dc5d4d"
-                size={23}
+                size={20}
                 style={{ marginBottom: "5" }}
               />
             </Container>

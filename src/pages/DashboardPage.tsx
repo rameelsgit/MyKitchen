@@ -14,7 +14,7 @@ const DashboardPage: React.FC = () => {
   return (
     <Container className="mt-5">
       <h2 className="text-center mb-4">
-        <MdDashboardCustomize size={35} />
+        <MdDashboardCustomize size={33} />
       </h2>
       {user ? (
         <div>
