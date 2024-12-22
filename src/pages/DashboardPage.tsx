@@ -19,7 +19,8 @@ const DashboardPage: React.FC = () => {
       {user ? (
         <div>
           <p className="text-center mb-4">
-            Welcome To Your Personal Dashboard {user.displayName || user.email}!
+            Welcome To Your Personal Dashboard, {user.displayName || user.email}
+            !
           </p>
           <Row className="justify-content-center">
             <Col xs={6} md={6} lg={3} className="mb-4">

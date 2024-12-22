@@ -4,7 +4,6 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
-  updateEmail,
   updatePassword,
   updateProfile,
   sendPasswordResetEmail,
@@ -24,7 +23,6 @@ interface AuthContextType {
   ) => Promise<UserCredential>;
   logout: () => Promise<void>;
   resetPassword: (email: string) => Promise<void>;
-  setEmail: (email: string) => Promise<void>;
   setDisplayName: (name: string) => Promise<void>;
   setPassword: (password: string) => Promise<void>;
   reloadUser: () => boolean;
@@ -89,11 +87,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     });
   };
 
-  const setEmail = (email: string) => {
-    if (!user) throw new Error("You must be logged in to update email.");
-    return updateEmail(user, email);
-  };
-
   const setPassword = (password: string) => {
     if (!user) throw new Error("You must be logged in to update password.");
     return updatePassword(user, password);
@@ -127,7 +120,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
         signup,
         logout,
         resetPassword,
-        setEmail,
         setPassword,
         setDisplayName,
         userEmail,
