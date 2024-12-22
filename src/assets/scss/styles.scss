@@ -1,0 +1,491 @@
+@import url("https://fonts.googleapis.com/css2?family=Buenard:wght@400;700&family=Lora:wght@500;600&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+body {
+  font-family: "Buenard", serif;
+}
+// NAVBAR
+
+$navbar-bg-color: #dc5d4d;
+$navbar-link-color: white;
+$navbar-hover-color: rgba(255, 255, 255, 0.8);
+
+.navbar {
+  background-color: $navbar-bg-color !important;
+}
+
+.navbar-brand {
+  color: $navbar-link-color !important;
+  font-weight: bold;
+
+  &:hover {
+    color: $navbar-hover-color !important;
+  }
+}
+
+.nav-link {
+  color: $navbar-link-color !important;
+  font-size: 1rem;
+
+  &:hover {
+    color: $navbar-hover-color !important;
+  }
+}
+
+.navbar-toggler-icon {
+  background-color: $navbar-bg-color !important;
+}
+
+.nav-dropdown-toggle {
+  color: $navbar-link-color !important;
+
+  &:hover {
+    color: $navbar-hover-color !important;
+  }
+}
+
+.nav-dropdown-item {
+  color: $navbar-link-color !important;
+
+  &:hover {
+    background-color: $navbar-hover-color;
+  }
+}
+
+.navbar-light .navbar-toggler-icon {
+  background-color: $navbar-bg-color !important;
+}
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=UTF8,%3Csvg xmlns%3D'http://www.w3.org/2000/svg' viewBox%3D'0 0 30 30'%3E%3Cpath stroke%3D'white' stroke-width%3D'2' d%3D'M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.navbar .dropdown-menu .dropdown-item:focus,
+.navbar .dropdown-menu .dropdown-item:active {
+  background-color: transparent !important;
+  color: inherit !important;
+  box-shadow: none !important;
+}
+
+// HEADER
+header {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  background-color: #dc5d4d;
+  text-align: center;
+  border-bottom: 1px solid transparent;
+  width: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+header {
+  display: block;
+}
+
+header img {
+  margin-top: 1em;
+  display: inline-block;
+  max-width: 1200px;
+  width: 100%;
+  height: auto;
+}
+
+img {
+  overflow-clip-margin: content-box;
+  overflow: clip;
+}
+
+// CARD
+
+.minimalist-card {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 25px;
+  padding: 0;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+  }
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+  }
+
+  h5 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #dc5d4d;
+    margin-top: 15px;
+  }
+
+  svg {
+    color: #dc5d4d;
+  }
+}
+
+.square-card {
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%;
+  position: relative;
+
+  .card-body {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+}
+
+// Welcome
+.text-center {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #666;
+}
+
+// Card container style
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.col {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+// Center text for header and h2
+header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+h1 {
+  font-size: 3rem;
+  color: #ffffff;
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+
+h2 {
+  // font-size: 2rem;
+  margin-bottom: 20px;
+  color: #5b4d4d;
+}
+
+// Search bar
+.search-bar {
+  width: 60%;
+  margin: 0 auto;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 30px;
+  border: 2px solid #ddd;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+// Button styling
+.generate-btn {
+  background-color: #dc5d4d;
+  border-radius: 30px;
+  padding: 10px 20px;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.generate-btn:hover {
+  background-color: #4cae4c;
+}
+
+button {
+  font-size: 1rem;
+  border-radius: 25px;
+  padding: 8px 16px;
+}
+
+// Recipe Card
+.card {
+  border: none;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+  border-radius: 12px;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card-body {
+  padding: 15px;
+}
+
+// Add favorite button
+.favorite-icon {
+  color: #dc5d4d;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+p {
+  font-size: 18px;
+}
+
+.favorite-icon-container {
+  display: flex;
+  justify-content: center;
+  padding: 9px;
+}
+
+.favorite-icon {
+  cursor: pointer;
+}
+
+// CALENDAR MEAL ITEM STYLE
+.meal-item {
+  list-style-type: none;
+  position: relative;
+}
+
+.meal-item::before {
+  content: "•";
+  position: absolute;
+  left: -20px;
+  font-size: 1em;
+  color: #dc5d4d;
+}
+
+// DETAILS PAGE, ARROW ICON
+.arrow-hover {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.arrow-hover:hover {
+  transform: scale(1.2);
+}
+
+// DETAIL PAGE, div row for ready in minutes & servings
+.custom-left-margin {
+  margin-left: -40px;
+}
+
+// EDIT PAGE
+.edit-page {
+  h2 {
+    font-weight: 600;
+    color: #666;
+  }
+}
+// FAV PAGE h2
+.fav-page {
+  h2 {
+    font-weight: 600;
+  }
+}
+
+// CALENDAR PAFGE h2
+.calendar-page {
+  h2 {
+    font-weight: 600;
+  }
+}
+
+// GROCERY page
+.groceries-page {
+  margin-top: 40px;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+
+  .grocery-list {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 10px;
+
+    .grocery-item {
+      display: flex;
+      align-items: center;
+      font-size: 1.2rem;
+      padding: 15px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      transition: background-color 0.3s ease;
+
+      .grocery-item-text {
+        margin-left: 10px;
+      }
+
+      &:hover {
+        background-color: #f1f1f1;
+      }
+
+      &.checked {
+        background-color: #f7f7f7;
+        .grocery-item-text {
+          text-decoration: line-through;
+          color: gray;
+        }
+      }
+
+      input[type="checkbox"] {
+        margin-right: 10px;
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+
+  .btn-primary {
+    background-color: #dc5d4d;
+    border-color: #dc5d4d;
+  }
+
+  .btn-primary:hover {
+    background-color: #c54f3a;
+    border-color: #c54f3a;
+  }
+
+  .form-control {
+    font-size: 1.1rem;
+  }
+
+  // Mobilefirst for GROCERY
+  @media (max-width: 576px) {
+    .grocery-item {
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      font-size: 0.9rem;
+    }
+
+    .form-control {
+      font-size: 1rem;
+    }
+    .btn-danger {
+      font-size: 0.9rem;
+    }
+  }
+}
+
+.clear-all-container {
+  margin-top: 20px;
+}
+
+.btn-danger {
+  background-color: #dc5d4d;
+  border-color: #e74c3c;
+}
+
+.btn-danger:hover {
+  background-color: #c0392b;
+  border-color: #c0392b;
+}
+
+// GROCERY checkbox
+.custom-checkbox {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #dc5d4d;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+}
+
+.custom-checkbox:checked {
+  background-color: #dc5d4d;
+  border-color: #dc5d4d;
+  position: relative;
+}
+
+.custom-checkbox:checked::after {
+  content: "";
+  display: block;
+  width: 10px;
+  height: 10px;
+  background: white;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  border-radius: 2px;
+}
+
+.meal-checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.custom-checkbox {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #dc5d4d;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+}
+
+.custom-checkbox:checked {
+  background-color: #dc5d4d;
+  border-color: #dc5d4d;
+  position: relative;
+}
+
+.custom-checkbox:checked::after {
+  content: "";
+  display: block;
+  width: 9px;
+  height: 10px;
+  background: white;
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  border-radius: 2px;
+}
+
+// NOT FOUND page
+.home-icon-container {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.home-icon-container:hover {
+  transform: scale(1.2);
+}
+
+.home-icon-container p {
+  margin-top: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.home-icon-container:hover p {
+  transform: translateY(-5px);
+}
