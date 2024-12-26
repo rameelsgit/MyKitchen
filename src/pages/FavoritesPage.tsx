@@ -21,7 +21,7 @@ const FavoritesPage: React.FC = () => {
           <p>
             Explore & generate recipes to add to the collection &nbsp;&nbsp;
             <Link to="/" style={{ textDecoration: "none", color: "#4cae4c" }}>
-              <LuPlusCircle size={36} />
+              <LuPlusCircle size={30} />
             </Link>
           </p>
         </div>

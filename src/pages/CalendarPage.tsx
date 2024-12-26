@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { format, addDays, startOfWeek } from "date-fns";
 import { Container, Button, Row, Col } from "react-bootstrap";
-import { BsPlus } from "react-icons/bs";
+import { BsPlus, BsCalendar3 } from "react-icons/bs";
+import { TbTrashX } from "react-icons/tb";
 import { useFavorites } from "../context/hooks/useFavorites";
 import AddMealModal from "../components/AddMealModal";
-import { TbTrashX } from "react-icons/tb";
-import { BsCalendar3 } from "react-icons/bs";
-import BackArrow from "../components/BackArrow";
 import { Link } from "react-router-dom";
 import { scale } from "../utils/scalingUtils";
+import { auth, db } from "../firebase/firebase";
+import { doc, onSnapshot, updateDoc, setDoc } from "firebase/firestore";
+import BackArrow from "../components/BackArrow";
 
 interface MealPlan {
   [key: string]: { id: string; title: string }[];
@@ -20,6 +21,7 @@ const CalendarPage: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [mealPlan, setMealPlan] = useState<MealPlan>({});
   const { favorites } = useFavorites();
+  const user = auth.currentUser;
 
   useEffect(() => {
     const today = new Date();
@@ -29,27 +31,36 @@ const CalendarPage: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    if (!user) return;
+
+    const mealPlanDoc = doc(db, "mealPlans", user.uid);
+
+    const unsubscribe = onSnapshot(mealPlanDoc, (docSnapshot) => {
+      if (docSnapshot.exists()) {
+        const firestoreMealPlan: MealPlan = docSnapshot.data()?.mealPlan || {};
+        setMealPlan((prev) => ({ ...prev, ...firestoreMealPlan }));
+        localStorage.setItem("mealPlan", JSON.stringify(firestoreMealPlan));
+      }
+    });
+
     const savedMealPlan = localStorage.getItem("mealPlan");
     if (savedMealPlan) {
       try {
         const parsedMealPlan: MealPlan = JSON.parse(savedMealPlan);
         setMealPlan(parsedMealPlan);
       } catch (error) {
-        console.error("Error parsing meal plan from localStorage:", error);
+        console.error("Error parsing local meal plan:", error);
       }
-    } else {
-      setMealPlan({});
     }
-  }, []);
+
+    return () => unsubscribe();
+  }, [user]);
 
   useEffect(() => {
-    if (Object.keys(mealPlan).length === 0) {
-      return;
-    }
     try {
       localStorage.setItem("mealPlan", JSON.stringify(mealPlan));
     } catch (error) {
-      console.error("Error saving meal plan to localStorage:", error);
+      console.error("Error saving meal plan to local storage:", error);
     }
   }, [mealPlan]);
 
@@ -63,31 +74,38 @@ const CalendarPage: React.FC = () => {
     setSelectedDate(null);
   };
 
-  const handleSelectMeal = (mealTitle: string, mealId: string) => {
-    if (!selectedDate) return;
+  const handleSelectMeal = async (mealTitle: string, mealId: string) => {
+    if (!selectedDate || !user) return;
 
     const dateKey = format(selectedDate, "yyyy-MM-dd");
+    const newMealPlan = { ...mealPlan };
+    if (!newMealPlan[dateKey]) {
+      newMealPlan[dateKey] = [{ id: mealId, title: mealTitle }];
+    } else if (!newMealPlan[dateKey].some((meal) => meal.id === mealId)) {
+      newMealPlan[dateKey].push({ id: mealId, title: mealTitle });
+    }
 
-    setMealPlan((prev) => {
-      const updatedMealPlan = { ...prev };
-      if (!updatedMealPlan[dateKey]) {
-        updatedMealPlan[dateKey] = [{ title: mealTitle, id: mealId }];
-      } else if (!updatedMealPlan[dateKey].some((meal) => meal.id === mealId)) {
-        updatedMealPlan[dateKey].push({ title: mealTitle, id: mealId });
-      }
-      return updatedMealPlan;
+    setMealPlan(newMealPlan);
+
+    const mealPlanDoc = doc(db, "mealPlans", user.uid);
+    await updateDoc(mealPlanDoc, { mealPlan: newMealPlan }).catch(async () => {
+      await setDoc(mealPlanDoc, { mealPlan: newMealPlan });
     });
   };
 
-  const handleRemoveMeal = (date: Date, mealId: string) => {
+  const handleRemoveMeal = async (date: Date, mealId: string) => {
+    if (!user) return;
+
     const dateKey = format(date, "yyyy-MM-dd");
-    setMealPlan((prev) => {
-      const updatedMealPlan = { ...prev };
-      updatedMealPlan[dateKey] = updatedMealPlan[dateKey]?.filter(
-        (meal) => meal.id !== mealId
-      );
-      return updatedMealPlan;
-    });
+    const updatedMealPlan = { ...mealPlan };
+    updatedMealPlan[dateKey] = updatedMealPlan[dateKey]?.filter(
+      (meal) => meal.id !== mealId
+    );
+
+    setMealPlan(updatedMealPlan);
+
+    const mealPlanDoc = doc(db, "mealPlans", user.uid);
+    await updateDoc(mealPlanDoc, { mealPlan: updatedMealPlan });
   };
 
   return (

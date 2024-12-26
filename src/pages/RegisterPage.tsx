@@ -13,8 +13,19 @@ const Register: React.FC = () => {
   const { signup } = useAuth();
   const navigate = useNavigate();
 
+  const validatePassword = (password: string): boolean => {
+    const regex = /^(?=.*[A-Z])(?=.*\d).+$/;
+    return regex.test(password);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!validatePassword(password)) {
+      toast.error(
+        "Password must contain at least one uppercase letter and one number."
+      );
+      return;
+    }
     if (password !== confirmPassword) {
       toast.error("Passwords do not match");
       return;
