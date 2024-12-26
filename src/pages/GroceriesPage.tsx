@@ -103,7 +103,7 @@ const GroceriesPage: React.FC = () => {
       <h2 className="text-center" style={{ fontSize: "2rem" }}>
         <RiShoppingBag4Line
           size={30}
-          style={{ marginTop: -15, marginRight: "10px" }}
+          style={{ marginTop: -15, marginRight: "5px" }}
         />
         Groceries
       </h2>
